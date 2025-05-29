@@ -1,11 +1,14 @@
 # Site settings
-title: Jaz BooM Personal Training
+title: Baoz Personal Training | 私人教練
 email: jaz_personaltraining@yahoo.co.uk
-description: "Jaz BooM Personal Training Official Webpage"
+description: "Baoz Personal Training Official Webpage"
+# Production Settings
+#baseurl: "/"
+#url: "https://www.jazboompersonaltraining.co.uk"
+# Development Settings
 baseurl: "/"
-url: "https://www.jazboompersonaltraining.co.uk"
-#baseurl: "/jazzsinghpersonaltrainer"
-#url: "https://atmenterprise.github.io"
+url: "http://localhost:4000"
+
 include: ["_pages"]
 logo: 'img/logo/jazboom.png'
 
@@ -17,7 +20,7 @@ appointment_booking_url: https://koalendar.com/e/atm-enterprise
 gym_group_url: https://www.thegymgroup.com/find-a-gym/east-london-gyms/london-ilford-pioneer-point/
 google_forms_url: https://docs.google.com/forms/d/1ytBEc-LurZGO_vNCqz9k6yHh1NQXmHzpGmw-G0G6Hxk/prefill
 google_analytics_id: G-RVS79BPFKD
-calendy_url: https://calendly.com/jaz_personaltraining/15min
+calendly_url: https://calendly.com/maggie81232/15-min-consultation
 
 # Developer settings
 developer_name: ATM Enterprise

@@ -1,41 +1,47 @@
 - id: 1
   program_id: "onetoonept"
-  name: "1:1 Personal Training"
+  name: "1:1 Personal Training 一對一私人訓練"
   short_description: "Working with a personal trainer helps you reach your goal faster while
 teaching you how to independently sustain your results after the process is
 complete.
+
+與私人教練一起訓練可以幫助您更快地達到目標，同時教導您如何在訓練結束後獨立維持成果。
   "
   image_url: 'img/programs/1.jpg'
-  page_url: 'onetoonept'
+  page_url: 'onetoonept.html'
 - id: 2
   program_id: "couplept"
-  name: "2:1 Personal Training"
+  name: "2:1 Personal Training 一對二私人訓練"
   short_description: "Share all the benefits of one to one personal training.
   
   Fun fact, studies have shown that exercising with a friend or family member
   can increase calories burned by up to 25%.
+
+共同分享一對一私人訓練的所有好處。
+
+研究顯示與朋友或家人一起運動可以增加高達25%的卡路里消耗。
   "
   image_url: 'img/programs/2.jpg'
-  page_url: 'couplept'
+  page_url: 'couplept.html'
 - id: 3
   program_id: "onlinept"
-  name: "Online Coaching"
+  name: "Online Coaching 線上教練課程"
   short_description: "Online Coaching tailored just for you.
   
   Online coaching allows you to work through your program remotely wherever you are with my support and guidance to help you continue to make progress.
-  
-  
+
+為您量身打造的線上教練課程。
+
+線上教練課程讓您可以在任何地方遠程進行訓練，並在我的支持和指導下持續取得進步。
   "
   image_url: 'img/programs/3.jpg'
-  page_url: 'onlinept'
+  page_url: 'onlinept.html'
 - id: 4
   program_id: "nutritionpt"
-  name: "Health Check"
-  short_description: "
-  Health check to help to highlight what symptoms and habits are holding you back from reaching your goals and what you could do today to begin positively managing your health.
-  
-  
-  
+  name: "Health Check 健康評估"
+  short_description: "Health check to help to highlight what symptoms and habits are holding you back from reaching your goals and what you could do today to begin positively managing your health.
+
+健康評估可以幫助您了解哪些症狀和習慣阻礙您達到目標，以及您今天可以採取哪些行動來積極管理您的健康。
   "
   image_url: 'img/programs/4.jpg'
-  page_url: 'nutritionpt'
+  page_url: 'nutritionpt.html'

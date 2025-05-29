@@ -24,7 +24,7 @@
                         <div class="panel-body">
                             <p class="wrap text-center">{{program.short_description | truncatewords: 40}}</p>
                             <p class="text-center">
-                                <a class="btn btn-default" href="{{site.baseurl}}/{{program.page_url}}" role="button">View details &raquo;</a>
+                                <a class="btn btn-default" href="{{ site.url }}{{ site.baseurl }}/{{ program.program_id }}" role="button">View details &raquo;</a>
                             </p>
                         </div>
                     </div>
@@ -35,6 +35,6 @@
         </div>
     </div>
 
-    <img src="{{site.logo}}" class="logowatermark" alt="jaz boom logo">
+    <img src="{{site.logo}}" class="logowatermark" alt="Baoz logo">
 
 </section>

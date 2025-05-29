@@ -15,7 +15,7 @@
                 {{site.title}}
             </a>
             {% else %}
-            <a class="navbar-brand page-scroll" href="{{site.baseurl}}/">{{site.title}}</a>
+            <a class="navbar-brand" href="{{site.baseurl}}/">{{site.title}}</a>
             {% endif %}
 
         </div>
@@ -35,24 +35,21 @@
                     <a class="page-scroll" href="#services">Specialist Areas</a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle page-scroll" data-toggle="dropdown" role="button"
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">
                         Programmes <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         {% for program in site.data.programs %}
-                        <li><a href="#{{program.program_id}}" class="page-scroll">{{program.name}}</a></li>
+                        <li><a href="{{ site.url }}{{ site.baseurl }}/{{ program.program_id }}">{{ program.name }}</a></li>
                         {% endfor %}
                     </ul>
-                </li>
-                <li>
-                    <a class="page-scroll" href="#shop">Shop</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#success">Success Stories</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="{{site.baseurl}}/booking#book">Book Now</a>
+                    <a href="{{ site.url }}{{ site.baseurl }}/booking#book">Book Now</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#contact">Contact</a>
@@ -61,40 +58,36 @@
                 {% else %}
 
                 <li>
-                    <a class="page-scroll" href="{{site.baseurl}}/">Home</a>
+                    <a href="{{site.url}}{{site.baseurl}}/">Home</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="{{site.baseurl}}/#about">About Me</a>
+                    <a href="{{site.url}}{{site.baseurl}}/#about">About Me</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="{{site.baseurl}}/#services">Specialist Areas</a>
+                    <a href="{{site.url}}{{site.baseurl}}/#services">Specialist Areas</a>
                 </li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle page-scroll" data-toggle="dropdown" role="button"
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button"
                        aria-haspopup="true" aria-expanded="false">
                         Programmes <span class="caret"></span>
                     </a>
                     <ul class="dropdown-menu">
                         {% for program in site.data.programs %}
-                        <li><a href="{{site.baseurl}}/{{program.program_id}}" class="page-scroll">{{program.name}}</a></li>
+                        <li><a href="{{ site.url }}{{ site.baseurl }}/{{ program.program_id }}">{{ program.name }}</a></li>
                         {% endfor %}
                     </ul>
                 </li>
                 <li>
-                    <a class="page-scroll" href="{{site.baseurl}}/#shop">Shop</a>
+                    <a href="{{site.url}}{{site.baseurl}}/#success">Success Stories</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="{{site.baseurl}}/#success">Success Stories</a>
+                    <a href="{{site.url}}{{site.baseurl}}/booking#book">Book Now</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="{{site.baseurl}}/booking#book">Book Now</a>
-                </li>
-                <li>
-                    <a class="page-scroll" href="{{site.baseurl}}/#contact">Contact</a>
+                    <a href="{{site.url}}{{site.baseurl}}/#contact">Contact</a>
                 </li>
                 {% endif %}
             </ul>
         </ul>
-    </div>
     </div>
 </nav>
