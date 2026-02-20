@@ -742,6 +742,23 @@ hr.light {
     padding: 0 15px;
 }
 
+/* Remove padding for booking form column - align form to left edge */
+.booking-form-container {
+    padding-left: 0 !important;
+    padding-right: 15px;
+}
+
+.booking-form-container #bookingForm {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.booking-form-container label,
+.booking-form-container .form-group {
+    padding-left: 0;
+    margin-left: 0;
+}
+
 @media (min-width: 992px) {
     .col-md-1 { flex: 0 0 8.333333%; max-width: 8.333333%; }
     .col-md-2 { flex: 0 0 16.666667%; max-width: 16.666667%; }
@@ -808,10 +825,14 @@ hr.light {
 /* Booking form styling */
 #bookingForm {
     max-width: 100%;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #bookingForm .form-group {
     margin-bottom: 25px;
+    padding-left: 0;
+    padding-right: 0;
 }
 
 #bookingForm label {
@@ -819,6 +840,8 @@ hr.light {
     margin-bottom: 8px;
     font-weight: 500;
     color: var(--dmc-3051-dark-green-gray);
+    padding-left: 0;
+    margin-left: 0;
 }
 
 #bookingForm .form-control {
