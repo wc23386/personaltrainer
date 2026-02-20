@@ -791,6 +791,22 @@ hr.light {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.booking-form-container .form-check-input {
+    order: 1;
+    margin-right: 8px;
+    margin-left: 0;
+    margin-top: 0;
+    flex-shrink: 0;
+}
+
+.booking-form-container .form-check-label {
+    order: 2;
+    margin-left: 0;
 }
 
 @media (min-width: 992px) {
@@ -895,16 +911,24 @@ hr.light {
 
 #bookingForm .form-check {
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    flex-direction: row;
 }
 
 #bookingForm .form-check-input {
     margin-right: 8px;
-    margin-top: 0.3em;
+    margin-top: 0;
+    margin-left: 0;
+    order: 1;
+    flex-shrink: 0;
 }
 
 #bookingForm .form-check-label {
     font-weight: normal;
     cursor: pointer;
+    order: 2;
+    margin-left: 0;
 }
 
 #bookingForm .form-text {

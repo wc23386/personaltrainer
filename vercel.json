@@ -2,5 +2,11 @@
   "buildCommand": "bundle exec jekyll build",
   "outputDirectory": "_site",
   "installCommand": "bundle install",
-  "framework": "jekyll"
+  "framework": "jekyll",
+  "rewrites": [
+    {
+      "source": "/api/(.*)",
+      "destination": "/api/$1"
+    }
+  ]
 }

@@ -32,27 +32,6 @@ permalink: /booking.html
             <div class="col-md-8 booking-form-container">
                 <h2 class="section-heading highlight" id="book">預約表單</h2>
                 <hr>
-                
-                <!-- 
-                    Resend Setup Instructions (Already Done!):
-                    
-                    ✅ Serverless function created: api/send-email.js
-                    
-                    📝 You only need to do this:
-                    1. Sign up for Resend at https://resend.com (if you haven't already)
-                    2. Get your API key from the Resend dashboard (Settings > API Keys)
-                    3. In Vercel:
-                       - Go to your project dashboard
-                       - Click "Settings" → "Environment Variables"
-                       - Add new variable:
-                         Name: RESEND_API_KEY
-                         Value: [paste your Resend API key]
-                         Environment: Production, Preview, Development (select all)
-                       - Click "Save"
-                    4. Redeploy your site (or it will auto-deploy on next push)
-                    
-                    That's it! The form will automatically work after you set the API key.
-                -->
                 <form id="bookingForm" method="POST">
                     <div class="form-group">
                         <label for="name">姓名 *</label>
@@ -301,7 +280,10 @@ Line ID: ${lineId || '未提供'}
         
         try {
             // Send to Resend API via serverless function
-            const response = await fetch('/api/send-email', {
+            // Use absolute URL for Vercel deployment
+            const apiUrl = window.location.origin + '/api/send-email';
+            
+            const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -314,9 +296,21 @@ Line ID: ${lineId || '未提供'}
                 })
             });
             
+            // Check if response is ok before parsing JSON
+            if (!response.ok) {
+                let errorMessage = '提交失敗';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.error || errorMessage;
+                } catch (e) {
+                    errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+                }
+                throw new Error(errorMessage);
+            }
+            
             const result = await response.json();
             
-            if (response.ok) {
+            if (result.success) {
                 // Success
                 messageDiv.innerHTML = '<div class="alert alert-success">預約表單已成功提交！我們會盡快與您聯絡。</div>';
                 messageDiv.style.display = 'block';
@@ -333,7 +327,8 @@ Line ID: ${lineId || '未提供'}
             }
         } catch (error) {
             console.error('Form submission error:', error);
-            messageDiv.innerHTML = '<div class="alert alert-danger">提交失敗，請稍後再試或直接透過 Line 聯絡我們。</div>';
+            const errorMsg = error.message || '提交失敗，請稍後再試或直接透過 Line 聯絡我們。';
+            messageDiv.innerHTML = `<div class="alert alert-danger">${errorMsg}</div>`;
             messageDiv.style.display = 'block';
         } finally {
             // Reset button state
