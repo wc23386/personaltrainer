@@ -26,5 +26,3 @@ permalink: /blog/nutrition-training.html
 - 日常：總熱量與蛋白質達標比單餐 timing 更重要。
 
 ---
-
-編輯此檔案即可更新文章內容：`_posts/2024-01-10-nutrition-training.md`

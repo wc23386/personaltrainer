@@ -1,7 +1,7 @@
-- name: 蔡小姐
+- name: 60歲蔡小姐 退休
   image: /img/testimonials/testimonial1.jpg
   category: 體態改善
-  content: 60歲蔡小姐，透過包給力教練的指導成功減重10公斤、8%體脂減少血糖、血壓的用藥並持續維持重量訓練及功能性訓練改善走路姿勢及降低跌倒風險
+  content: 透過包給力教練的指導成功減重10公斤、8%體脂減少血糖、血壓的用藥並持續維持重量訓練及功能性訓練改善走路姿勢及降低跌倒風險
   instagram: https://www.instagram.com/givespower.health
 
 - name: Crystal
@@ -10,10 +10,10 @@
   content: 在包給力的幫助下，我成功減重了10公斤，不僅外型改變，整體健康狀況也大幅改善！教練專業的指導讓我學會正確的運動方式和飲食習慣，現在的我比以前更有活力和自信。
   instagram: https://www.instagram.com/givespower.health
 
-- name: John
-  image: /img/testimonials/default.jpg
-  category: 增肌成功
-  content: 專業的教練指導讓我學會正確的訓練方法，三個月內成功增肌8公斤！教練根據我的目標量身打造訓練計劃，並持續追蹤我的進展，讓我能夠突破平台期，達成目標。
+- name: 32歲丁小姐 上班族
+  image: /img/testimonials/testimonial2.jpg
+  category: 體態改善
+  content: 搭配教練指導 改善身體長期的不適 成功減重7公斤 10%體脂
   instagram: https://www.instagram.com/givespower.health
 
 - name: Mike

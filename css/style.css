@@ -336,11 +336,63 @@ hr.section-hr {
     border-radius: 5px;
     padding: 10px;
     transition: border-color 0.3s ease;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 16px; /* Prevent zoom on iOS */
 }
 
 .form-control:focus {
     border-color: var(--dmc-782-dark-topaz);
     box-shadow: 0 0 0 0.2rem rgba(174, 119, 32, 0.25);
+}
+
+/* Form validation feedback */
+.form-control.is-valid {
+    border-color: #28a745;
+}
+
+.form-control.is-valid:focus {
+    border-color: #28a745;
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.form-control.is-invalid {
+    border-color: #dc3545;
+}
+
+.form-control.is-invalid:focus {
+    border-color: #dc3545;
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+}
+
+.invalid-feedback {
+    display: block;
+    width: 100%;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+    color: #dc3545;
+}
+
+.form-text {
+    display: block;
+    margin-top: 0.25rem;
+    font-size: 0.875rem;
+}
+
+/* Select dropdown - prevent cut-off */
+select.form-control {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding-right: 30px; /* Space for dropdown arrow */
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3e%3cpath fill='%23333' d='M6 9L1 4h10z'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 12px;
 }
 
 /* Alert Messages */
@@ -610,6 +662,23 @@ footer .social-links a {
     section h2 {
         font-size: 20px !important;
     }
+    
+    /* Form fixes for mobile */
+    .form-horizontal .form-group {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .form-horizontal .control-label {
+        text-align: left;
+        margin-bottom: 5px;
+        min-width: auto;
+    }
+    
+    .form-horizontal .col-sm-9 {
+        width: 100%;
+        max-width: 100%;
+    }
 }
 
 /* Utilities */
@@ -704,12 +773,47 @@ hr.light {
 
 .form-horizontal .form-group {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
 }
 
 .form-horizontal .control-label {
     padding-right: 15px;
     text-align: right;
+    flex: 0 0 auto;
+    min-width: 100px;
+}
+
+.form-horizontal .col-sm-9,
+.form-horizontal .col-sm-offset-3 {
+    flex: 1 1 auto;
+    min-width: 0; /* Allow flex item to shrink below content size */
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure form inputs don't overflow their containers */
+.form-horizontal .col-sm-9 .form-control,
+.form-horizontal .col-sm-9 select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Booking form specific fixes */
+#bookingForm .form-group {
+    margin-bottom: 20px;
+}
+
+#bookingForm .col-sm-9 {
+    overflow: hidden; /* Prevent any overflow */
+    width: 100%;
+    max-width: 100%;
+}
+
+#bookingForm select.form-control {
+    font-size: 16px;
+    padding: 8px 35px 8px 10px; /* Extra right padding for arrow */
 }
 
 /* Radio Buttons */

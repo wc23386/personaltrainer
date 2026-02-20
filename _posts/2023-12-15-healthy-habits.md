@@ -22,5 +22,3 @@ permalink: /blog/healthy-habits.html
 5. **接納波動**：偶爾中斷沒關係，重點是下一次立刻回到軌道。
 
 ---
-
-編輯此檔案即可更新文章內容：`_posts/2023-12-15-healthy-habits.md`

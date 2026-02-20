@@ -30,5 +30,3 @@ permalink: /blog/getting-started.html
 不確定怎麼練、怎麼吃時，可以找教練做一次評估與規劃，減少試錯、避免受傷。
 
 ---
-
-編輯此檔案即可更新文章內容：`_posts/2024-01-15-getting-started.md`

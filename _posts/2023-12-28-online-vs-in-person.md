@@ -28,5 +28,3 @@ permalink: /blog/online-vs-in-person.html
 - 也可以混合：部分面對面、部分線上，依生活節奏調整。
 
 ---
-
-編輯此檔案即可更新文章內容：`_posts/2023-12-28-online-vs-in-person.md`

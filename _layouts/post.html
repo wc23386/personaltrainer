@@ -14,7 +14,16 @@
     <header class="page-header" style="padding: 100px 0 60px;">
         <div class="container text-center">
             <h1 style="font-size: 42px; font-weight: bold; margin-bottom: 15px;">{{ page.title }}</h1>
-            <p class="text-muted" style="font-size: 18px;">{{ page.date | date: "%Y年%m月%d日" }}</p>
+            <p class="text-muted" style="font-size: 18px;">
+                {{ page.date | date: "%Y年%m月%d日" }}
+                {% if page.ig_link %}
+                <span class="ml-3">
+                    <a href="{{ page.ig_link }}" target="_blank" rel="noopener noreferrer" title="查看 Instagram 貼文" style="color: var(--dmc-742-light-tangerine); font-size: 20px;">
+                        <i class="bi bi-instagram"></i> 查看 Instagram 貼文
+                    </a>
+                </span>
+                {% endif %}
+            </p>
         </div>
     </header>
 
@@ -29,6 +38,14 @@
                 <div class="blog-post-content">
                     {{ content }}
                 </div>
+                {% if page.ig_link %}
+                <div style="margin-top: 30px; padding: 20px; background-color: #f8f9fa; border-radius: 5px; text-align: center;">
+                    <p style="margin-bottom: 10px;">想看到更多相關內容？</p>
+                    <a href="{{ page.ig_link }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="color: white;">
+                        <i class="bi bi-instagram"></i> 查看 Instagram 貼文
+                    </a>
+                </div>
+                {% endif %}
                 <p style="margin-top: 40px;">
                     <a href="{{ '/blog.html' | relative_url }}" class="btn btn-default">&laquo; 返回專業分享</a>
                 </p>

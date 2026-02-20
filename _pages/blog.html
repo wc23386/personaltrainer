@@ -45,7 +45,16 @@ permalink: /blog.html
                         </div>
                         <div class="col-md-8">
                             <h3 class="highlight">{{ post.title }}</h3>
-                            <p class="text-muted">{{ post.date | date: "%Y年%m月%d日" }}</p>
+                            <p class="text-muted">
+                                {{ post.date | date: "%Y年%m月%d日" }}
+                                {% if post.ig_link %}
+                                <span class="ml-3">
+                                    <a href="{{ post.ig_link }}" target="_blank" rel="noopener noreferrer" title="查看 Instagram 貼文" style="color: var(--dmc-742-light-tangerine); font-size: 18px;">
+                                        <i class="bi bi-instagram"></i>
+                                    </a>
+                                </span>
+                                {% endif %}
+                            </p>
                             <p>{{ post.excerpt }}</p>
                             <a href="{{ post.url | relative_url }}" class="btn btn-default">閱讀更多 &raquo;</a>
                         </div>

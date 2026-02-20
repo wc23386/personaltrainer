@@ -20,5 +20,3 @@ permalink: /blog/plateau-strategies.html
 必要時可與教練或營養專業人士一起檢視，找出最適合你的下一步。
 
 ---
-
-編輯此檔案即可更新文章內容：`_posts/2023-12-20-plateau-strategies.md`
