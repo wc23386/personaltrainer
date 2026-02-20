@@ -1,0 +1,16 @@
+- name: 首頁
+  url: /
+  is_home: true
+- name: 關於我們
+  url: /about.html
+- name: 課程介紹
+  url: /programmes.html
+- name: 成功案例
+  url: /testimonials.html
+- name: 專業分享
+  url: /blog.html
+- name: 常見問題
+  url: /faq.html
+- name: 預約體驗
+  url: /booking.html
+  button: true

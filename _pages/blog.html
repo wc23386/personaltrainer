@@ -1,0 +1,77 @@
+---
+layout: default
+title: 專業分享 - 包給力 Givespower.health
+permalink: /blog.html
+---
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+    {% include nav.html %}
+
+    <!-- Header -->
+    <header class="page-header" style="padding: 150px 0 100px;">
+        <div class="container text-center">
+            <img src="{{ '/img/logo/logo.png' | relative_url }}" alt="包給力 Givespower.health" class="logo" style="max-width: 200px; margin-bottom: 30px;">
+            <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">專業分享</h1>
+            <h3 class="lead highlight" style="font-size: 24px; margin-bottom: 30px;">分享健身知識、營養建議與健康生活小貼士</h3>
+            <a href="https://lin.ee/Umt7lpD" target="_blank" class="page-scroll btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">立即預約體驗</a>
+        </div>
+    </header>
+
+    <!-- Blog Posts Section -->
+    <div class="container" style="padding: 80px 0;">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="section-heading highlight text-center">最新文章</h2>
+                <hr>
+            </div>
+        </div>
+
+        {% for post in site.posts %}
+        <div class="row" style="margin-bottom: 40px;">
+            <div class="col-md-8 col-md-offset-2">
+                <div class="blog-post">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <img src="{{ post.image | relative_url }}" class="img-responsive" alt="{{ post.title }}" style="width: 100%; border-radius: 5px;">
+                        </div>
+                        <div class="col-md-8">
+                            <h3 class="highlight">{{ post.title }}</h3>
+                            <p class="text-muted">{{ post.date | date: "%Y年%m月%d日" }}</p>
+                            <p>{{ post.excerpt }}</p>
+                            <a href="{{ post.url | relative_url }}" class="btn btn-default">閱讀更多 &raquo;</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% if forloop.last == false %}
+        <hr>
+        {% endif %}
+        {% endfor %}
+    </div>
+
+    <!-- CTA Section -->
+    <section class="hero-home" style="padding: 80px 0;">
+        <div class="container text-center">
+            <h2 style="font-size: 36px; font-weight: bold; margin-bottom: 20px;">想要獲得更多專業健身知識嗎？</h2>
+            <p class="lead" style="margin-bottom: 30px;">追蹤我們的 Instagram，獲得最新的健身知識和健康小貼士！</p>
+            <a href="https://www.instagram.com/givespower.health" target="_blank" class="btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">追蹤 Instagram</a>
+        </div>
+    </section>
+
+    {% include footer.html %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

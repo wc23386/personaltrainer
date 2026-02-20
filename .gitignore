@@ -1,20 +1,26 @@
-_site
-.sass-cache
-.jekyll-cache
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+booking.db
+
+# Jekyll
+.sass-cache/
+.jekyll-cache/
 .jekyll-metadata
-vendor
-.idea
+Gemfile.lock
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
 .DS_Store
-img/.DS_Store
-img/.DS_Store
-.DS_Store
-.DS_Store
-img/.DS_Store
-img/.DS_Store
-.DS_Store
-img/.DS_Store
-.DS_Store
-img/.DS_Store
-img/.DS_Store
-img/.DS_Store
-.DS_Store
+Thumbs.db

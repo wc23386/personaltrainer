@@ -1,32 +1,18 @@
 # Site settings
-title: Baoz Personal Training | 私人教練
-email: jaz_personaltraining@yahoo.co.uk
-description: "Baoz Personal Training Official Webpage"
-# Production Settings
-#baseurl: "/"
-#url: "https://www.jazboompersonaltraining.co.uk"
+title: 包給力 Givespower.health
+email: givespower.health@gmail.com
+
 # Development Settings
 baseurl: "/"
 url: "http://localhost:4000"
 
 include: ["_pages"]
-logo: 'img/logo/jazboom.png'
+logo: 'img/logo/logo.png'
 
-facebook_url: https://www.facebook.com/JazBooMPT
-instagram_url: https://www.instagram.com/jaz_boom_pt/
-whatsapp_url: https://wa.me/447415547566?text=Hi%20Jaz
-address_url: https://goo.gl/maps/LWHsbBC1DGUCpS7x6
-appointment_booking_url: https://koalendar.com/e/atm-enterprise
-gym_group_url: https://www.thegymgroup.com/find-a-gym/east-london-gyms/london-ilford-pioneer-point/
-google_forms_url: https://docs.google.com/forms/d/1ytBEc-LurZGO_vNCqz9k6yHh1NQXmHzpGmw-G0G6Hxk/prefill
-google_analytics_id: G-RVS79BPFKD
-calendly_url: https://calendly.com/maggie81232/15-min-consultation
+line_url: https://lin.ee/Umt7lpD
+instagram_url: https://www.instagram.com/givespower.health
+address_url: https://maps.app.goo.gl/V34db2nEdmVg2K6t7
 
 # Developer settings
-developer_name: ATM Enterprise
-developer_webpage: https://linktr.ee/atmenterprise
-twitter_username:
-github_username:
+developer_name: Crystal Chang
 
-# Build settings
-markdown: kramdown

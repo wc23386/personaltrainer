@@ -1,0 +1,118 @@
+---
+layout: default
+title: 關於我們 - 包給力 Givespower.health
+permalink: /about.html
+---
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+</head>
+<body>
+    {% include nav.html %}
+
+    <!-- Header -->
+    <header class="page-header" style="padding: 150px 0 100px;">
+        <div class="container text-center">
+            <img src="{{ '/img/logo/logo.png' | relative_url }}" alt="包給力 Givespower.health" class="logo" style="max-width: 200px; margin-bottom: 30px;">
+            <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">關於我們</h1>
+            <h3 class="lead" style="font-size: 24px; margin-bottom: 30px;">認識我們的專業教練團隊</h3>
+            <a href="booking.html" class="page-scroll btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">立即預約體驗</a>
+        </div>
+    </header>
+
+    <!-- Trainers Section -->
+    <div class="container about-trainers" style="padding: 80px 0;">
+        <!-- Bao Section -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="trainer-card">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img src="{{ '/img/profile/bao.jpg' | relative_url }}" class="img-responsive" alt="Bao profile" style="max-width: 200px; margin: 0 auto;">
+                        </div>
+                        <div class="col-md-8">
+                            <h2 class="highlight" style="font-size: 32px; margin-bottom: 20px;">肉包｜5 年教練經驗、16 年街舞經驗</h2>
+                            <hr>
+                            <p class="lead" style="margin-bottom: 30px;">
+                                運動帶來的，不只是外型改變，而是睡眠、情緒與生活節奏的穩定。
+                            </p>
+                            
+                            <h3 class="highlight" style="margin-bottom: 20px;">服務族群包含：</h3>
+                            <ul class="list-unstyled" style="margin-bottom: 30px;">
+                                <li>✔ 三高與代謝失衡族群</li>
+                                <li>✔ 身心壓力過載的上班族</li>
+                                <li>✔ 長期服藥希望改善體質者</li>
+                                <li>✔ 樂齡族肌力與退化預防</li>
+                            </ul>
+                            
+                            <blockquote class="blockquote">
+                                <p class="lead highlight">我相信：身體穩定，是人生重新站起來的基礎。
+                                    我教的不只是動作，而是陪你慢慢把自己找回來。
+                                </p>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <!-- Luke Section -->
+            <div class="col-md-12">
+                <div class="trainer-card">
+                    <div class="row">
+                        <div class="col-md-4 text-center">
+                            <img src="{{ '/img/profile/luke.jpg' | relative_url }}" class="img-responsive" alt="Luke profile" style="max-width: 200px; margin: 0 auto;">
+                        </div>
+                        <div class="col-md-8">
+                            <h2 class="highlight" style="font-size: 32px; margin-bottom: 20px;">Luke｜5年教練經驗</h2>
+                            <hr>
+                            <p class="lead" style="margin-bottom: 30px;">
+                                專注於科學化訓練與客製化課表設計。我相信，每個人的身體條件與生活型態都不同，因此我不套公式，只為你打造最適合的訓練方式。
+                            </p>
+                            
+                            <h3 class="highlight" style="margin-bottom: 20px;">主攻重量訓練肌力發展，搭配壺鈴與TRX做功能整合。</h3>
+                            <ul class="list-unstyled" style="margin-bottom: 30px;">
+                                <li>✔ 增肌減脂</li>
+                                <li>✔ 改善體態</li>
+                                <li>✔ 建立核心與穩定度</li>
+                                <li>✔ 新手入門規劃</li>
+                            </ul>
+                            
+                            <blockquote class="blockquote">
+                                <p class="lead highlight">從體態雕塑、增肌減脂，到體能提升與動作矯正，我陪你一步一步進步，而不是只追求短期效果。
+                                    訓練不只是流汗，而是讓你真正改變。
+                                </p>
+                            </blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row text-center">
+            <div class="col-md-12">
+                <h3 class="highlight" style="font-size: 28px; margin-bottom: 20px;">準備好開始您的健身之旅了嗎？</h3>
+                <p class="lead" style="margin-bottom: 30px;">立即預約免費體驗，讓我們一起達成您的目標！</p>
+                <a href="booking.html" class="btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">立即預約體驗</a>
+            </div>
+        </div>
+    </div>
+
+    {% include footer.html %}
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

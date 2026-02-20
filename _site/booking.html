@@ -1,25 +1,96 @@
----
-layout: default
-title: 預約體驗 - 包給力 Givespower.health
-permalink: /booking.html
----
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ page.title }}</title>
+    <title>預約體驗 - 包給力 Givespower.health</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+    <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
-    {% include nav.html %}
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/img/logo/logo.png" alt="包給力 Givespower.health" style="max-height: 40px; margin-right: 10px;">
+            <!-- 包給力 Givespower.health -->
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/">首頁</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/about.html">關於我們</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/programmes.html">課程介紹</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/testimonials.html">成功案例</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/blog.html">專業分享</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/faq.html">常見問題</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary active" href="/booking.html">預約體驗</a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+/* Navbar: DMC 782 dark topaz toggler */
+.navbar-toggler {
+    border-color: var(--dmc-782-dark-topaz);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='%23AE7720' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+@media (max-width: 991px) {
+    .navbar-nav .nav-link.btn-primary {
+        margin: 10px 0;
+        text-align: center;
+    }
+}
+</style>
+
 
     <!-- Header -->
     <header class="page-header" style="padding: 150px 0 100px;">
         <div class="container text-center">
-            <img src="{{ '/img/logo/logo.png' | relative_url }}" alt="包給力 Givespower.health" class="logo" style="max-width: 200px; margin-bottom: 30px;">
+            <img src="/img/logo/logo.png" alt="包給力 Givespower.health" class="logo" style="max-width: 200px; margin-bottom: 30px;">
             <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">預約體驗</h1>
             <h3 class="lead" style="font-size: 24px; margin-bottom: 30px;">填寫下方表單，我們會盡快與您聯絡安排免費諮詢。</h3>
             <a href="https://lin.ee/Umt7lpD" target="_blank" class="page-scroll btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">立即預約體驗</a>
