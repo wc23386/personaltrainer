@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 如何開始您的健身之旅？
-date: 2024-01-15
+date: 2026-01-15
 image: /img/programs/onetoone.jpg
 excerpt: 剛開始健身可能會讓人感到困惑，但只要掌握正確的方法，任何人都可以達成健康目標。在這篇文章中，我們將分享新手入門的五大關鍵步驟，幫助您建立正確的健身基礎。
 permalink: /blog/getting-started.html

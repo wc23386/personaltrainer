@@ -32,7 +32,7 @@ permalink: /booking.html
             <div class="col-md-8 booking-form-container">
                 <h2 class="section-heading highlight" id="book">預約表單</h2>
                 <hr>
-                <form id="bookingForm" method="POST">
+                <form id="bookingForm" method="POST" action="javascript:void(0);" onsubmit="return false;">
                     <div class="form-group">
                         <label for="name">姓名 *</label>
                         <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入您的姓名">
@@ -166,7 +166,7 @@ permalink: /booking.html
             <hr>
             <div class="row text-center">
                 <div class="col-md-12">
-                    <p>&copy; 2024 包給力 Givespower.health. All rights reserved.</p>
+                    <p>&copy; 2026 包給力 Givespower.health. All rights reserved.</p>
                 </div>
             </div>
         </div>
@@ -176,9 +176,6 @@ permalink: /booking.html
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-    // Set FormSubmit redirect URL to current page with success parameter
-    document.getElementById('formNextUrl').value = window.location.origin + window.location.pathname + '?success=true';
-    
     // Check for success parameter in URL (from FormSubmit redirect)
     const urlParams = new URLSearchParams(window.location.search);
     if (urlParams.get('success') === 'true') {
@@ -234,6 +231,10 @@ permalink: /booking.html
     // Form submission validation and Resend API call
     document.getElementById('bookingForm').addEventListener('submit', async function(e) {
         e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        
+        console.log('Form submission intercepted');
         
         const name = document.getElementById('name').value.trim();
         const phone = document.getElementById('phone').value.trim();
@@ -289,6 +290,9 @@ Line ID: ${lineId || '未提供'}
                 ? 'http://localhost:3001/api/send-email'
                 : window.location.origin + '/api/send-email';
             
+            // console.log('Sending request to:', apiUrl);
+            // console.log('Request data:', { to: 'givespower.health@gmail.com', subject: '新預約表單 - 包給力 Givespower.health', text: emailContent });
+            
             const response = await fetch(apiUrl, {
                 method: 'POST',
                 headers: {
@@ -298,7 +302,6 @@ Line ID: ${lineId || '未提供'}
                     to: 'givespower.health@gmail.com',
                     subject: '新預約表單 - 包給力 Givespower.health',
                     text: emailContent,
-                    replyTo: lineId ? `${lineId}@line.me` : undefined
                 })
             });
             

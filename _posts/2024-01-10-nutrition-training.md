@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 營養與訓練的完美平衡
-date: 2024-01-10
+date: 2026-01-10
 image: /img/programs/nutrition.jpg
 excerpt: 許多人只注重訓練而忽略了營養的重要性。事實上，營養佔了健身成功的70%。本文將教導您如何制定個人化的營養計劃，讓您的訓練效果加倍。
 permalink: /blog/nutrition-training.html
