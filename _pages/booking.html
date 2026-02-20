@@ -43,52 +43,46 @@ permalink: /booking.html
                     
                     Formspree free tier: 50 submissions/month, no sponsor footer!
                 -->
-                <form id="bookingForm" class="form-horizontal" action="https://formspree.io/f/xqeddyqj" method="POST">
+                <form id="bookingForm" action="https://formspree.io/f/xqeddyqj" method="POST">
                     <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">姓名 *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入您的姓名">
-                        </div>
+                        <label for="name">姓名 *</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入您的姓名">
                     </div>
 
                     <div class="form-group">
-                        <label for="phone" class="col-sm-3 control-label">電話 *</label>
-                        <div class="col-sm-9">
-                            <input type="tel" class="form-control" id="phone" name="phone" required 
-                                   pattern="[0-9]{10}" 
-                                   placeholder="請輸入10位數字電話號碼（例如：0912345678）"
-                                   maxlength="10"
-                                   oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                            <small class="form-text text-muted" id="phoneHelp">請輸入10位數字，不含空格、橫線或特殊符號</small>
-                            <div class="invalid-feedback" id="phoneError" style="display: none;">電話號碼必須是10位數字</div>
-                        </div>
+                        <label for="phone">電話 *</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required 
+                               pattern="[0-9]{10}" 
+                               placeholder="請輸入10位數字電話號碼（例如：0912345678）"
+                               maxlength="10"
+                               oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <small class="form-text text-muted" id="phoneHelp">請輸入10位數字，不含空格、橫線或特殊符號</small>
+                        <div class="invalid-feedback" id="phoneError" style="display: none;">電話號碼必須是10位數字</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="line_id" class="col-sm-3 control-label">Line ID</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="line_id" name="line_id" placeholder="請輸入您的 Line ID（選填）">
-                        </div>
+                        <label for="line_id">Line ID <span class="text-muted">(選填)</span></label>
+                        <input type="text" class="form-control" id="line_id" name="line_id" placeholder="請輸入您的 Line ID">
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">可聯絡時段 *</label>
-                        <div class="col-sm-9">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="contact_time" value="早上(8~12點)" required>
+                        <label>可聯絡時段 *</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="contact_time" id="morning" value="早上(8~12點)" required>
+                                <label class="form-check-label" for="morning">
                                     早上 (8~12點)
                                 </label>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="contact_time" value="中午(13~18點)">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="contact_time" id="noon" value="中午(13~18點)">
+                                <label class="form-check-label" for="noon">
                                     中午 (13~18點)
                                 </label>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="contact_time" value="晚上(19~22點)">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="contact_time" id="evening" value="晚上(19~22點)">
+                                <label class="form-check-label" for="evening">
                                     晚上 (19~22點)
                                 </label>
                             </div>
@@ -96,23 +90,19 @@ permalink: /booking.html
                     </div>
 
                     <div class="form-group">
-                        <label for="goal" class="col-sm-3 control-label">運動目標 *</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="goal" name="goal" required>
-                                <option value="">請選擇您的目標</option>
-                                <option value="減肥">減肥</option>
-                                <option value="瘦身">瘦身</option>
-                                <option value="健康">健康</option>
-                                <option value="固定運動">固定運動</option>
-                                <option value="企業合作">企業合作</option>
-                            </select>
-                        </div>
+                        <label for="goal">運動目標 *</label>
+                        <select class="form-control" id="goal" name="goal" required>
+                            <option value="">請選擇您的目標</option>
+                            <option value="減肥">減肥</option>
+                            <option value="瘦身">瘦身</option>
+                            <option value="健康">健康</option>
+                            <option value="固定運動">固定運動</option>
+                            <option value="企業合作">企業合作</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <button type="submit" class="btn btn-primary btn-lg">提交預約</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">提交預約</button>
                     </div>
                     
                     <!-- Formspree configuration -->

@@ -805,10 +805,62 @@ hr.light {
     margin-bottom: 20px;
 }
 
-#bookingForm .col-sm-9 {
-    overflow: hidden; /* Prevent any overflow */
-    width: 100%;
+/* Booking form styling */
+#bookingForm {
     max-width: 100%;
+}
+
+#bookingForm .form-group {
+    margin-bottom: 25px;
+}
+
+#bookingForm label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: var(--dmc-3051-dark-green-gray);
+}
+
+#bookingForm .form-control {
+    width: 100%;
+    padding: 10px 15px;
+    font-size: 16px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+#bookingForm .form-control:focus {
+    border-color: var(--dmc-782-dark-topaz);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(174, 119, 32, 0.2);
+}
+
+#bookingForm .form-check {
+    margin-bottom: 10px;
+}
+
+#bookingForm .form-check-input {
+    margin-right: 8px;
+    margin-top: 0.3em;
+}
+
+#bookingForm .form-check-label {
+    font-weight: normal;
+    cursor: pointer;
+}
+
+#bookingForm .form-text {
+    display: block;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+#bookingForm .invalid-feedback {
+    display: block;
+    color: #dc3545;
+    font-size: 14px;
+    margin-top: 5px;
 }
 
 #bookingForm select.form-control {
