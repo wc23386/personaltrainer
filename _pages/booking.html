@@ -35,7 +35,9 @@ permalink: /booking.html
                 <form id="bookingForm" method="POST" action="javascript:void(0);" onsubmit="return false;">
                     <div class="form-group">
                         <label for="name">姓名 *</label>
-                        <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入您的姓名">
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入您的姓名" maxlength="50">
+                        <small class="form-text text-muted" id="nameHelp">請輸入中文、英文、空格或常見標點符號</small>
+                        <div class="invalid-feedback" id="nameError" style="display: none;">姓名格式不正確</div>
                     </div>
 
                     <div class="form-group">
@@ -51,7 +53,9 @@ permalink: /booking.html
 
                     <div class="form-group">
                         <label for="line_id">Line ID <span class="text-muted">(選填)</span></label>
-                        <input type="text" class="form-control" id="line_id" name="line_id" placeholder="請輸入您的 Line ID">
+                        <input type="text" class="form-control" id="line_id" name="line_id" placeholder="請輸入您的 Line ID" maxlength="50">
+                        <small class="form-text text-muted" id="lineIdHelp">請輸入英數字、底線、連字號或點號</small>
+                        <div class="invalid-feedback" id="lineIdError" style="display: none;">Line ID 格式不正確</div>
                     </div>
 
                     <div class="form-group">
@@ -186,11 +190,65 @@ permalink: /booking.html
         window.history.replaceState({}, document.title, window.location.pathname);
     }
     
+    // Input sanitization function - removes HTML tags and dangerous characters
+    function sanitizeInput(input) {
+        if (!input) return '';
+        // Remove HTML tags
+        let sanitized = input.replace(/<[^>]*>/g, '');
+        // Remove script tags and event handlers
+        sanitized = sanitized.replace(/javascript:/gi, '');
+        sanitized = sanitized.replace(/on\w+\s*=/gi, '');
+        // Remove control characters except newlines and tabs
+        sanitized = sanitized.replace(/[\x00-\x08\x0B-\x0C\x0E-\x1F\x7F]/g, '');
+        return sanitized.trim();
+    }
+    
+    // HTML entity escaping function
+    function escapeHtml(text) {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, m => map[m]);
+    }
+    
+    // Validate name - only allows Chinese characters, English letters, spaces, and common punctuation
+    function validateName(name) {
+        if (!name || name.length === 0) return false;
+        if (name.length > 50) return false;
+        // Allow Chinese characters, English letters, spaces, and common punctuation
+        const namePattern = /^[\u4e00-\u9fa5a-zA-Z\s\.\-\'\(\)]+$/;
+        return namePattern.test(name);
+    }
+    
+    // Validate Line ID - alphanumeric, underscores, hyphens, dots
+    function validateLineId(lineId) {
+        if (!lineId || lineId.length === 0) return true; // Optional field
+        if (lineId.length > 50) return false;
+        const lineIdPattern = /^[a-zA-Z0-9_\.\-]+$/;
+        return lineIdPattern.test(lineId);
+    }
+    
     // Phone number validation function
     function validatePhone(phone) {
         // Remove any non-digit characters and check length
         const digitsOnly = phone.replace(/[^0-9]/g, '');
         return digitsOnly.length === 10 && /^[0-9]{10}$/.test(digitsOnly);
+    }
+    
+    // Validate contact time - must be one of the allowed values
+    function validateContactTime(contactTime) {
+        const allowedValues = ['早上(8~12點)', '中午(13~18點)', '晚上(19~22點)'];
+        return contactTime && allowedValues.includes(contactTime);
+    }
+    
+    // Validate goal - must be one of the allowed values
+    function validateGoal(goal) {
+        const allowedValues = ['減肥', '瘦身', '健康', '固定運動', '企業合作'];
+        return goal && allowedValues.includes(goal);
     }
     
     // Real-time phone validation
@@ -228,26 +286,115 @@ permalink: /booking.html
         }
     });
     
+    // Real-time name validation
+    const nameInput = document.getElementById('name');
+    const nameError = document.getElementById('nameError');
+    const nameHelp = document.getElementById('nameHelp');
+    
+    nameInput.addEventListener('input', function() {
+        const nameValue = sanitizeInput(this.value);
+        this.value = nameValue; // Update input with sanitized value
+        
+        if (nameValue.length > 0) {
+            if (validateName(nameValue)) {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+                nameError.style.display = 'none';
+                nameHelp.style.color = '#28a745';
+            } else {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+                nameError.style.display = 'block';
+                nameHelp.style.color = '#dc3545';
+            }
+        } else {
+            this.classList.remove('is-valid', 'is-invalid');
+            nameError.style.display = 'none';
+            nameHelp.style.color = '#6c757d';
+        }
+    });
+    
+    nameInput.addEventListener('blur', function() {
+        const nameValue = sanitizeInput(this.value);
+        this.value = nameValue;
+        if (nameValue.length > 0 && !validateName(nameValue)) {
+            this.classList.add('is-invalid');
+            nameError.style.display = 'block';
+        }
+    });
+    
+    // Real-time Line ID validation
+    const lineIdInput = document.getElementById('line_id');
+    const lineIdError = document.getElementById('lineIdError');
+    const lineIdHelp = document.getElementById('lineIdHelp');
+    
+    lineIdInput.addEventListener('input', function() {
+        const lineIdValue = sanitizeInput(this.value);
+        this.value = lineIdValue; // Update input with sanitized value
+        
+        if (lineIdValue.length > 0) {
+            if (validateLineId(lineIdValue)) {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+                lineIdError.style.display = 'none';
+                lineIdHelp.style.color = '#28a745';
+            } else {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+                lineIdError.style.display = 'block';
+                lineIdHelp.style.color = '#dc3545';
+            }
+        } else {
+            this.classList.remove('is-valid', 'is-invalid');
+            lineIdError.style.display = 'none';
+            lineIdHelp.style.color = '#6c757d';
+        }
+    });
+    
+    lineIdInput.addEventListener('blur', function() {
+        const lineIdValue = sanitizeInput(this.value);
+        this.value = lineIdValue;
+        if (lineIdValue.length > 0 && !validateLineId(lineIdValue)) {
+            this.classList.add('is-invalid');
+            lineIdError.style.display = 'block';
+        }
+    });
+    
     // Form submission validation and Resend API call
     document.getElementById('bookingForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         e.stopPropagation();
         e.stopImmediatePropagation();
         
-        console.log('Form submission intercepted');
-        
-        const name = document.getElementById('name').value.trim();
-        const phone = document.getElementById('phone').value.trim();
-        const lineId = document.getElementById('line_id').value.trim();
-        const contactTime = document.querySelector('input[name="contact_time"]:checked');
-        const goal = document.getElementById('goal').value;
         const messageDiv = document.getElementById('formMessage');
         const submitBtn = this.querySelector('button[type="submit"]');
         
+        // Get and sanitize form values
+        let name = document.getElementById('name').value.trim();
+        let phone = document.getElementById('phone').value.trim();
+        let lineId = document.getElementById('line_id').value.trim();
+        const contactTimeRadio = document.querySelector('input[name="contact_time"]:checked');
+        const goal = document.getElementById('goal').value;
+        
+        // Sanitize all inputs
+        name = sanitizeInput(name);
+        phone = sanitizeInput(phone);
+        lineId = sanitizeInput(lineId);
+        
         // Validate required fields
-        if (!name || !phone || !contactTime || !goal) {
+        if (!name || !phone || !contactTimeRadio || !goal) {
             messageDiv.innerHTML = '<div class="alert alert-danger">請填寫所有必填欄位。</div>';
             messageDiv.style.display = 'block';
+            return false;
+        }
+        
+        const contactTime = contactTimeRadio.value;
+        
+        // Validate name format
+        if (!validateName(name)) {
+            messageDiv.innerHTML = '<div class="alert alert-danger">姓名格式不正確，請只使用中文、英文、空格或常見標點符號。</div>';
+            messageDiv.style.display = 'block';
+            document.getElementById('name').focus();
             return false;
         }
         
@@ -261,22 +408,51 @@ permalink: /booking.html
             return false;
         }
         
+        // Validate Line ID format (if provided)
+        if (lineId && !validateLineId(lineId)) {
+            messageDiv.innerHTML = '<div class="alert alert-danger">Line ID 格式不正確，請只使用英數字、底線、連字號或點號。</div>';
+            messageDiv.style.display = 'block';
+            document.getElementById('line_id').focus();
+            return false;
+        }
+        
+        // Validate contact time (whitelist check)
+        if (!validateContactTime(contactTime)) {
+            messageDiv.innerHTML = '<div class="alert alert-danger">請選擇有效的聯絡時段。</div>';
+            messageDiv.style.display = 'block';
+            return false;
+        }
+        
+        // Validate goal (whitelist check)
+        if (!validateGoal(goal)) {
+            messageDiv.innerHTML = '<div class="alert alert-danger">請選擇有效的運動目標。</div>';
+            messageDiv.style.display = 'block';
+            return false;
+        }
+        
         // Show loading state
         submitBtn.disabled = true;
         submitBtn.textContent = '提交中...';
         messageDiv.style.display = 'none';
         
-        // Prepare email content
+        // Prepare email content with sanitized and escaped values
+        const safeName = escapeHtml(name);
+        const safePhone = escapeHtml(phone);
+        const safeLineId = lineId ? escapeHtml(lineId) : '未提供';
+        const safeContactTime = escapeHtml(contactTime);
+        const safeGoal = escapeHtml(goal);
+        const timestamp = new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' });
+        
         const emailContent = `
 新預約表單 - 包給力 Givespower.health
 
-姓名: ${name}
-電話: ${phone}
-Line ID: ${lineId || '未提供'}
-可聯絡時段: ${contactTime.value}
-運動目標: ${goal}
+姓名: ${safeName}
+電話: ${safePhone}
+Line ID: ${safeLineId}
+可聯絡時段: ${safeContactTime}
+運動目標: ${safeGoal}
 
-提交時間: ${new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })}
+提交時間: ${timestamp}
         `.trim();
         
         try {
