@@ -112,6 +112,43 @@ a:hover {
     margin-left: 10px;
 }
 
+/* Mobile navigation - align 預約體驗 to left */
+@media (max-width: 991px) {
+    .navbar-nav {
+        text-align: left !important;
+        padding-left: 0 !important;
+    }
+    
+    .navbar-nav .nav-item {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    .navbar-nav .nav-link {
+        text-align: left !important;
+        justify-content: flex-start !important;
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+    }
+    
+    .navbar-nav .nav-link.btn-primary {
+        text-align: left !important;
+        justify-content: flex-start !important;
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-top: 10px !important;
+        margin-bottom: 10px !important;
+        display: block !important;
+        padding-left: 0 !important;
+        padding-right: 20px !important;
+        padding-top: 8px !important;
+        padding-bottom: 8px !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+    }
+}
+
 .navbar-nav .nav-link.btn-primary:hover,
 .navbar-nav .nav-link.btn-primary.active {
     background-color: var(--dmc-782-dark-topaz-hover) !important;
@@ -758,14 +795,21 @@ hr.light {
 }
 
 .booking-form-container #bookingForm {
-    padding-left: 0;
-    padding-right: 0;
-    margin-left: 0;
-    margin-right: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
     overflow: visible;
+}
+
+.booking-form-container #bookingForm .form-group,
+.booking-form-container #bookingForm .form-group > div,
+.booking-form-container #bookingForm .form-check {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
 }
 
 .booking-form-container h2,
@@ -787,26 +831,40 @@ hr.light {
 .booking-form-container .form-control,
 .booking-form-container input,
 .booking-form-container select,
+.booking-form-container .form-group > div {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
 .booking-form-container .form-check {
     width: 100%;
     max-width: 100%;
     box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
 }
 
 .booking-form-container .form-check-input {
-    order: 1;
-    margin-right: 8px;
-    margin-left: 0;
-    margin-top: 0;
-    flex-shrink: 0;
+    order: 1 !important;
+    margin-right: 8px !important;
+    margin-left: 0 !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    flex-shrink: 0 !important;
+    flex-grow: 0 !important;
+    float: none !important;
+    position: static !important;
 }
 
 .booking-form-container .form-check-label {
-    order: 2;
-    margin-left: 0;
+    order: 2 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    float: none !important;
+    flex-grow: 1 !important;
 }
 
 @media (min-width: 992px) {
@@ -881,8 +939,20 @@ hr.light {
 
 #bookingForm .form-group {
     margin-bottom: 25px;
-    padding-left: 0;
-    padding-right: 0;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+    margin-left: 0 !important;
+}
+
+#bookingForm .form-group > label {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
+#bookingForm .form-group > div {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+    width: 100%;
 }
 
 #bookingForm label {
@@ -909,26 +979,58 @@ hr.light {
     box-shadow: 0 0 0 2px rgba(174, 119, 32, 0.2);
 }
 
+#bookingForm .form-group > div {
+    padding-left: 0 !important;
+    margin-left: 0 !important;
+}
+
 #bookingForm .form-check {
     margin-bottom: 10px;
-    display: flex;
-    align-items: center;
-    flex-direction: row;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-direction: row !important;
+    width: 100%;
 }
 
 #bookingForm .form-check-input {
-    margin-right: 8px;
-    margin-top: 0;
-    margin-left: 0;
-    order: 1;
-    flex-shrink: 0;
+    margin-right: 8px !important;
+    margin-top: 0 !important;
+    margin-left: 0 !important;
+    margin-bottom: 0 !important;
+    order: 1 !important;
+    flex-shrink: 0 !important;
+    float: none !important;
+    position: static !important;
+    flex-grow: 0 !important;
 }
 
 #bookingForm .form-check-label {
     font-weight: normal;
     cursor: pointer;
-    order: 2;
-    margin-left: 0;
+    order: 2 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    float: none !important;
+    display: inline-block !important;
+    flex-grow: 1 !important;
+}
+
+/* Override any Bootstrap styles that might reverse the order */
+#bookingForm .form-check input[type="radio"] {
+    order: 1 !important;
+    margin-right: 8px !important;
+    margin-left: 0 !important;
+    float: none !important;
+    position: relative !important;
+}
+
+#bookingForm .form-check label {
+    order: 2 !important;
+    margin-left: 0 !important;
+    padding-left: 0 !important;
+    float: none !important;
 }
 
 #bookingForm .form-text {

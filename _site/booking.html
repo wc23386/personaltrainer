@@ -79,9 +79,27 @@
 }
 
 @media (max-width: 991px) {
+    .navbar-nav {
+        padding-left: 0 !important;
+    }
+    
+    .navbar-nav .nav-item {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+    }
+    
+    .navbar-nav .nav-link {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        text-align: left !important;
+    }
+    
     .navbar-nav .nav-link.btn-primary {
-        margin: 10px 0;
-        text-align: center;
+        margin: 10px 0 !important;
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+        text-align: left !important;
+        width: 100% !important;
     }
 }
 </style>
@@ -99,51 +117,50 @@
 
     <!-- Booking Form Section -->
     <div class="container" style="padding: 80px 0;">
-        <div class="row">
-            <div class="col-md-8">
+        <div class="row booking-form-row">
+            <div class="col-md-8 booking-form-container">
                 <h2 class="section-heading highlight" id="book">預約表單</h2>
                 <hr>
-                
-                <form id="bookingForm" class="form-horizontal">
+                <form id="bookingForm" method="POST">
                     <div class="form-group">
-                        <label for="name" class="col-sm-3 control-label">姓名 *</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入您的姓名">
-                        </div>
+                        <label for="name">姓名 *</label>
+                        <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入您的姓名">
                     </div>
 
                     <div class="form-group">
-                        <label for="phone" class="col-sm-3 control-label">電話 *</label>
-                        <div class="col-sm-9">
-                            <input type="tel" class="form-control" id="phone" name="phone" required placeholder="請輸入您的電話號碼">
-                        </div>
+                        <label for="phone">電話 *</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" required 
+                               pattern="[0-9]{10}" 
+                               placeholder="請輸入10位數字電話號碼（例如：0912345678）"
+                               maxlength="10"
+                               oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <small class="form-text text-muted" id="phoneHelp">請輸入10位數字，不含空格、橫線或特殊符號</small>
+                        <div class="invalid-feedback" id="phoneError" style="display: none;">電話號碼必須是10位數字</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="line_id" class="col-sm-3 control-label">Line ID</label>
-                        <div class="col-sm-9">
-                            <input type="text" class="form-control" id="line_id" name="line_id" placeholder="請輸入您的 Line ID（選填）">
-                        </div>
+                        <label for="line_id">Line ID <span class="text-muted">(選填)</span></label>
+                        <input type="text" class="form-control" id="line_id" name="line_id" placeholder="請輸入您的 Line ID">
                     </div>
 
                     <div class="form-group">
-                        <label class="col-sm-3 control-label">可聯絡時段 *</label>
-                        <div class="col-sm-9">
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="contact_time" value="早上(8~12點)" required>
+                        <label>可聯絡時段 *</label>
+                        <div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="contact_time" id="morning" value="早上(8~12點)" required>
+                                <label class="form-check-label" for="morning">
                                     早上 (8~12點)
                                 </label>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="contact_time" value="中午(13~18點)">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="contact_time" id="noon" value="中午(13~18點)">
+                                <label class="form-check-label" for="noon">
                                     中午 (13~18點)
                                 </label>
                             </div>
-                            <div class="radio">
-                                <label>
-                                    <input type="radio" name="contact_time" value="晚上(19~22點)">
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="contact_time" id="evening" value="晚上(19~22點)">
+                                <label class="form-check-label" for="evening">
                                     晚上 (19~22點)
                                 </label>
                             </div>
@@ -151,24 +168,21 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="goal" class="col-sm-3 control-label">運動目標 *</label>
-                        <div class="col-sm-9">
-                            <select class="form-control" id="goal" name="goal" required>
-                                <option value="">請選擇您的目標</option>
-                                <option value="減肥">減肥</option>
-                                <option value="瘦身">瘦身</option>
-                                <option value="健康">健康</option>
-                                <option value="固定運動">固定運動</option>
-                                <option value="企業合作">企業合作</option>
-                            </select>
-                        </div>
+                        <label for="goal">運動目標 *</label>
+                        <select class="form-control" id="goal" name="goal" required>
+                            <option value="">請選擇您的目標</option>
+                            <option value="減肥">減肥</option>
+                            <option value="瘦身">瘦身</option>
+                            <option value="健康">健康</option>
+                            <option value="固定運動">固定運動</option>
+                            <option value="企業合作">企業合作</option>
+                        </select>
                     </div>
 
                     <div class="form-group">
-                        <div class="col-sm-offset-3 col-sm-9">
-                            <button type="submit" class="btn btn-primary btn-lg">提交預約</button>
-                        </div>
+                        <button type="submit" class="btn btn-primary btn-lg">提交預約</button>
                     </div>
+                    
                 </form>
 
                 <div id="formMessage" style="display: none; margin-top: 20px;"></div>
@@ -251,42 +265,171 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    // Set FormSubmit redirect URL to current page with success parameter
+    document.getElementById('formNextUrl').value = window.location.origin + window.location.pathname + '?success=true';
+    
+    // Check for success parameter in URL (from FormSubmit redirect)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+        const messageDiv = document.getElementById('formMessage');
+        messageDiv.innerHTML = '<div class="alert alert-success">預約表單已成功提交！我們會盡快與您聯絡。</div>';
+        messageDiv.style.display = 'block';
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    
+    // Phone number validation function
+    function validatePhone(phone) {
+        // Remove any non-digit characters and check length
+        const digitsOnly = phone.replace(/[^0-9]/g, '');
+        return digitsOnly.length === 10 && /^[0-9]{10}$/.test(digitsOnly);
+    }
+    
+    // Real-time phone validation
+    const phoneInput = document.getElementById('phone');
+    const phoneError = document.getElementById('phoneError');
+    const phoneHelp = document.getElementById('phoneHelp');
+    
+    phoneInput.addEventListener('input', function() {
+        const phoneValue = this.value.trim();
+        
+        if (phoneValue.length > 0) {
+            if (validatePhone(phoneValue)) {
+                this.classList.remove('is-invalid');
+                this.classList.add('is-valid');
+                phoneError.style.display = 'none';
+                phoneHelp.style.color = '#28a745';
+            } else {
+                this.classList.remove('is-valid');
+                this.classList.add('is-invalid');
+                phoneError.style.display = 'block';
+                phoneHelp.style.color = '#dc3545';
+            }
+        } else {
+            this.classList.remove('is-valid', 'is-invalid');
+            phoneError.style.display = 'none';
+            phoneHelp.style.color = '#6c757d';
+        }
+    });
+    
+    phoneInput.addEventListener('blur', function() {
+        const phoneValue = this.value.trim();
+        if (phoneValue.length > 0 && !validatePhone(phoneValue)) {
+            this.classList.add('is-invalid');
+            phoneError.style.display = 'block';
+        }
+    });
+    
+    // Form submission validation and Resend API call
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
         e.preventDefault();
         
-        const formData = {
-            name: document.getElementById('name').value,
-            phone: document.getElementById('phone').value,
-            line_id: document.getElementById('line_id').value,
-            contact_time: document.querySelector('input[name="contact_time"]:checked')?.value || '',
-            goal: document.getElementById('goal').value
-        };
-
-        fetch('http://localhost:5000/api/booking', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
-            const messageDiv = document.getElementById('formMessage');
-            if (data.success) {
-                messageDiv.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
-                messageDiv.style.display = 'block';
-                document.getElementById('bookingForm').reset();
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">' + data.message + '</div>';
-                messageDiv.style.display = 'block';
-            }
-        })
-        .catch(error => {
-            const messageDiv = document.getElementById('formMessage');
-            messageDiv.innerHTML = '<div class="alert alert-danger">提交失敗，請稍後再試或直接透過 Line 聯絡我們。</div>';
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const lineId = document.getElementById('line_id').value.trim();
+        const contactTime = document.querySelector('input[name="contact_time"]:checked');
+        const goal = document.getElementById('goal').value;
+        const messageDiv = document.getElementById('formMessage');
+        const submitBtn = this.querySelector('button[type="submit"]');
+        
+        // Validate required fields
+        if (!name || !phone || !contactTime || !goal) {
+            messageDiv.innerHTML = '<div class="alert alert-danger">請填寫所有必填欄位。</div>';
             messageDiv.style.display = 'block';
-            console.error('Error:', error);
-        });
+            return false;
+        }
+        
+        // Validate phone number format
+        if (!validatePhone(phone)) {
+            phoneInput.classList.add('is-invalid');
+            phoneError.style.display = 'block';
+            messageDiv.innerHTML = '<div class="alert alert-danger">電話號碼必須是10位數字，不含空格、橫線或特殊符號。</div>';
+            messageDiv.style.display = 'block';
+            phoneInput.focus();
+            return false;
+        }
+        
+        // Show loading state
+        submitBtn.disabled = true;
+        submitBtn.textContent = '提交中...';
+        messageDiv.style.display = 'none';
+        
+        // Prepare email content
+        const emailContent = `
+新預約表單 - 包給力 Givespower.health
+
+姓名: ${name}
+電話: ${phone}
+Line ID: ${lineId || '未提供'}
+可聯絡時段: ${contactTime.value}
+運動目標: ${goal}
+
+提交時間: ${new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })}
+        `.trim();
+        
+        try {
+            // Check if running on localhost (local development)
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1' ||
+                               window.location.hostname === '';
+            
+            // Use local API server on localhost, Vercel serverless function on production
+            const apiUrl = isLocalhost 
+                ? 'http://localhost:3001/api/send-email'
+                : window.location.origin + '/api/send-email';
+            
+            const response = await fetch(apiUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    to: 'givespower.health@gmail.com',
+                    subject: '新預約表單 - 包給力 Givespower.health',
+                    text: emailContent,
+                    replyTo: lineId ? `${lineId}@line.me` : undefined
+                })
+            });
+            
+            // Check if response is ok before parsing JSON
+            if (!response.ok) {
+                let errorMessage = '提交失敗';
+                try {
+                    const errorData = await response.json();
+                    errorMessage = errorData.error || errorMessage;
+                } catch (e) {
+                    errorMessage = `HTTP ${response.status}: ${response.statusText}`;
+                }
+                throw new Error(errorMessage);
+            }
+            
+            const result = await response.json();
+            
+            if (result.success) {
+                // Success
+                messageDiv.innerHTML = '<div class="alert alert-success">預約表單已成功提交！我們會盡快與您聯絡。</div>';
+                messageDiv.style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                phoneInput.classList.remove('is-valid', 'is-invalid');
+                phoneError.style.display = 'none';
+                
+                // Scroll to message
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                throw new Error(result.error || '提交失敗');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            const errorMsg = error.message || '提交失敗，請稍後再試或直接透過 Line 聯絡我們。';
+            messageDiv.innerHTML = `<div class="alert alert-danger">${errorMsg}</div>`;
+            messageDiv.style.display = 'block';
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            submitBtn.textContent = '提交預約';
+        }
     });
     </script>
 </body>

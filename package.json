@@ -1,0 +1,14 @@
+{
+  "name": "personaltrainer-local-api",
+  "version": "1.0.0",
+  "description": "Local API server for Resend email",
+  "main": "local-api-server.js",
+  "scripts": {
+    "start": "node local-api-server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^16.6.1",
+    "express": "^4.22.1"
+  }
+}

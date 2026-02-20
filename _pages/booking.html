@@ -279,9 +279,15 @@ Line ID: ${lineId || '未提供'}
         `.trim();
         
         try {
-            // Send to Resend API via serverless function
-            // Use absolute URL for Vercel deployment
-            const apiUrl = window.location.origin + '/api/send-email';
+            // Check if running on localhost (local development)
+            const isLocalhost = window.location.hostname === 'localhost' || 
+                               window.location.hostname === '127.0.0.1' ||
+                               window.location.hostname === '';
+            
+            // Use local API server on localhost, Vercel serverless function on production
+            const apiUrl = isLocalhost 
+                ? 'http://localhost:3001/api/send-email'
+                : window.location.origin + '/api/send-email';
             
             const response = await fetch(apiUrl, {
                 method: 'POST',
