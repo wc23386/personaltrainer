@@ -285,6 +285,14 @@ header {
     color: var(--black) !important;
 }
 
+/* FAQ CTA: align both buttons in a row or stacked on mobile */
+.faq-cta-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
 /* Index main sections: white bg, DMC 742 light tangerine header text, black body text */
 .section-main {
     background-color: var(--white);
@@ -672,6 +680,11 @@ footer .social-links a {
     /* About page: add space between profile image and title when stacked on mobile */
     .trainer-profile-text {
         margin-top: 28px;
+    }
+    
+    /* Blog page: center article blocks on mobile (offset pushes them right otherwise) */
+    .blog-post-row .col-md-offset-2 {
+        margin-left: 0;
     }
     
     /* Navbar brand - prevent overflow */
