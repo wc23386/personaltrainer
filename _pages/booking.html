@@ -33,7 +33,7 @@ permalink: /booking.html
                 <h2 class="section-heading highlight" id="book">預約表單</h2>
                 <hr>
                 
-                <form id="bookingForm" class="form-horizontal">
+                <form id="bookingForm" class="form-horizontal" action="https://formsubmit.co/givespower.health@gmail.com" method="POST">
                     <div class="form-group">
                         <label for="name" class="col-sm-3 control-label">姓名 *</label>
                         <div class="col-sm-9">
@@ -98,6 +98,12 @@ permalink: /booking.html
                             <button type="submit" class="btn btn-primary btn-lg">提交預約</button>
                         </div>
                     </div>
+                    
+                    <!-- FormSubmit configuration -->
+                    <input type="hidden" name="_subject" value="新預約表單 - 包給力 Givespower.health">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_template" value="table">
+                    <input type="hidden" name="_next" id="formNextUrl">
                 </form>
 
                 <div id="formMessage" style="display: none; margin-top: 20px;"></div>
@@ -180,42 +186,39 @@ permalink: /booking.html
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+    // Set FormSubmit redirect URL to current page with success parameter
+    document.getElementById('formNextUrl').value = window.location.origin + window.location.pathname + '?success=true';
+    
+    // Check for success parameter in URL (from FormSubmit redirect)
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('success') === 'true') {
+        const messageDiv = document.getElementById('formMessage');
+        messageDiv.innerHTML = '<div class="alert alert-success">預約表單已成功提交！我們會盡快與您聯絡。</div>';
+        messageDiv.style.display = 'block';
+        // Clean URL
+        window.history.replaceState({}, document.title, window.location.pathname);
+    }
+    
+    // Optional: Add client-side validation before submit
     document.getElementById('bookingForm').addEventListener('submit', function(e) {
-        e.preventDefault();
+        // FormSubmit will handle the submission, but we can add validation here
+        const name = document.getElementById('name').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const contactTime = document.querySelector('input[name="contact_time"]:checked');
+        const goal = document.getElementById('goal').value;
         
-        const formData = {
-            name: document.getElementById('name').value,
-            phone: document.getElementById('phone').value,
-            line_id: document.getElementById('line_id').value,
-            contact_time: document.querySelector('input[name="contact_time"]:checked')?.value || '',
-            goal: document.getElementById('goal').value
-        };
-
-        fetch('http://localhost:5000/api/booking', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(formData)
-        })
-        .then(response => response.json())
-        .then(data => {
+        if (!name || !phone || !contactTime || !goal) {
+            e.preventDefault();
             const messageDiv = document.getElementById('formMessage');
-            if (data.success) {
-                messageDiv.innerHTML = '<div class="alert alert-success">' + data.message + '</div>';
-                messageDiv.style.display = 'block';
-                document.getElementById('bookingForm').reset();
-            } else {
-                messageDiv.innerHTML = '<div class="alert alert-danger">' + data.message + '</div>';
-                messageDiv.style.display = 'block';
-            }
-        })
-        .catch(error => {
-            const messageDiv = document.getElementById('formMessage');
-            messageDiv.innerHTML = '<div class="alert alert-danger">提交失敗，請稍後再試或直接透過 Line 聯絡我們。</div>';
+            messageDiv.innerHTML = '<div class="alert alert-danger">請填寫所有必填欄位。</div>';
             messageDiv.style.display = 'block';
-            console.error('Error:', error);
-        });
+            return false;
+        }
+        
+        // Show loading state
+        const submitBtn = this.querySelector('button[type="submit"]');
+        submitBtn.disabled = true;
+        submitBtn.textContent = '提交中...';
     });
     </script>
 </body>

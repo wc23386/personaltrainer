@@ -29,6 +29,29 @@ body {
     color: var(--text-color);
     background-color: var(--white);
     line-height: 1.6;
+    overflow-x: hidden; /* Prevent horizontal scroll */
+}
+
+/* Prevent text overflow globally */
+h1, h2, h3, h4, h5, h6 {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+p, .lead {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+/* Ensure all text containers respect viewport */
+header, section, .container {
+    max-width: 100vw;
+    overflow-x: hidden;
 }
 
 a {
@@ -156,6 +179,14 @@ header {
 .page-header {
     background: var(--dmc-742-light-tangerine) !important;
     color: var(--black) !important;
+    overflow-x: hidden; /* Prevent overflow */
+}
+
+.page-header .container {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
 }
 
 .page-header h1,
@@ -201,6 +232,14 @@ header {
     background: var(--dmc-742-light-tangerine) !important;
     color: var(--black) !important;
     padding: 150px 0 100px !important;
+    overflow-x: hidden; /* Prevent overflow */
+}
+
+.hero-home .container {
+    max-width: 100%;
+    padding-left: 15px;
+    padding-right: 15px;
+    box-sizing: border-box;
 }
 
 .hero-home h1,
@@ -443,18 +482,133 @@ footer .social-links a {
     color: var(--dmc-782-dark-topaz);
 }
 
-/* Responsive */
+/* Responsive - Mobile text overflow fixes */
 @media (max-width: 768px) {
+    /* Container padding for mobile */
+    .container {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+    
+    /* Hero section - prevent text overflow */
+    .hero-home,
+    .page-header {
+        padding-left: 15px !important;
+        padding-right: 15px !important;
+    }
+    
+    .hero-home h1,
+    .page-header h1,
+    header h1 {
+        font-size: 28px !important;
+        word-wrap: break-word;
+        word-break: break-word;
+        overflow-wrap: anywhere; /* Better wrapping for long words */
+        hyphens: auto;
+        padding: 0 10px;
+        max-width: 100%;
+        box-sizing: border-box;
+        white-space: normal; /* Allow wrapping */
+    }
+    
+    /* Break long compound words like "Givespower.health" on mobile */
+    @media (max-width: 480px) {
+        .hero-home h1,
+        .page-header h1 {
+            overflow-wrap: break-word; /* Break long words if needed */
+        }
+    }
+    
+    .hero-home h3,
+    .page-header h3,
+    header h3,
+    .hero-home .lead,
+    .page-header .lead {
+        font-size: 18px !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding: 0 10px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    .hero-home p,
+    .page-header p {
+        font-size: 16px !important;
+        padding: 0 10px;
+        max-width: 100%;
+        box-sizing: border-box;
+    }
+    
+    /* General header content */
     .header-content h1 {
-        font-size: 32px;
+        font-size: 28px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding: 0 10px;
     }
     
     .header-content h3 {
         font-size: 18px;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding: 0 10px;
+    }
+    
+    /* Section headings */
+    .section-heading {
+        font-size: 24px !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding: 0 10px;
+    }
+    
+    /* CTA sections */
+    section h2 {
+        font-size: 24px !important;
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+        padding: 0 10px;
     }
     
     .programme-card {
         flex-direction: column;
+    }
+    
+    /* Navbar brand - prevent overflow */
+    .navbar-brand {
+        font-size: 16px !important;
+        max-width: calc(100% - 100px);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+    
+    .navbar-brand img {
+        max-height: 30px !important;
+    }
+}
+
+/* Extra small mobile devices */
+@media (max-width: 480px) {
+    .hero-home h1,
+    .page-header h1,
+    header h1 {
+        font-size: 24px !important;
+    }
+    
+    .hero-home h3,
+    .page-header h3,
+    header h3 {
+        font-size: 16px !important;
+    }
+    
+    .section-heading {
+        font-size: 20px !important;
+    }
+    
+    section h2 {
+        font-size: 20px !important;
     }
 }
 
@@ -493,6 +647,18 @@ hr.light {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 15px;
+    box-sizing: border-box;
+    overflow-x: hidden; /* Prevent horizontal overflow */
+}
+
+/* Ensure all containers respect viewport width */
+@media (max-width: 768px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
 }
 
 /* Row and Col */

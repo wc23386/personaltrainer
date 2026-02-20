@@ -70,9 +70,9 @@ title: 包給力 Givespower.health - 專業個人訓練服務
                 <div class="col-md-3">
                     <div class="card text-center">
                         <div class="card-body">
-                            <img src="{{ '/img/icons/balance.gif' | relative_url }}" alt="健康評估" style="width: 80px; height: 80px; margin-bottom: 20px;">
-                            <h4 class="highlight">健康評估</h4>
-                            <p>專業健康檢測，了解身體狀況</p>
+                            <img src="{{ '/img/icons/balance.gif' | relative_url }}" alt="體態評估" style="width: 80px; height: 80px; margin-bottom: 20px;">
+                            <h4 class="highlight">體態評估</h4>
+                            <p>專業inbody檢測，了解身體狀況。</p>
                         </div>
                     </div>
                 </div>
@@ -159,36 +159,18 @@ title: 包給力 Givespower.health - 專業個人訓練服務
             </div>
 
             <div class="row">
+                {% for testimonial in site.data.testimonials limit: 3 %}
                 <div class="col-md-4">
                     <div class="testimonial-card">
                         <div class="card-body text-center">
-                            <img src="{{ '/img/testimonials/crystal.jpg' | relative_url }}" alt="Crystal" class="img-responsive" style="max-width: 100px; margin-bottom: 20px;">
-                            <h5 class="highlight">Crystal</h5>
-                            <p class="text-muted">減重成功</p>
-                            <p>"在包給力的幫助下，我成功減重了10公斤，不僅外型改變，整體健康狀況也大幅改善！"</p>
+                            <img src="{{ testimonial.image | relative_url }}" alt="{{ testimonial.name }}" class="img-responsive" style="max-width: 100px; margin-bottom: 20px;">
+                            <h5 class="highlight">{{ testimonial.name }}</h5>
+                            <p class="text-muted">{{ testimonial.category }}</p>
+                            <p>"{{ testimonial.content | truncatewords: 30 }}"</p>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <div class="card-body text-center">
-                            <img src="{{ '/img/testimonials/default.jpg' | relative_url }}" alt="客戶" class="img-responsive" style="max-width: 100px; margin-bottom: 20px;">
-                            <h5 class="highlight">John</h5>
-                            <p class="text-muted">增肌成功</p>
-                            <p>"專業的教練指導讓我學會正確的訓練方法，三個月內成功增肌8公斤！"</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="testimonial-card">
-                        <div class="card-body text-center">
-                            <img src="{{ '/img/testimonials/default.jpg' | relative_url }}" alt="客戶" class="img-responsive" style="max-width: 100px; margin-bottom: 20px;">
-                            <h5 class="highlight">Sarah</h5>
-                            <p class="text-muted">健康改善</p>
-                            <p>"透過專業的健康評估和訓練計劃，我的血壓和血糖都恢復正常了！"</p>
-                        </div>
-                    </div>
-                </div>
+                {% endfor %}
             </div>
 
             <div class="row text-center" style="margin-top: 40px;">
