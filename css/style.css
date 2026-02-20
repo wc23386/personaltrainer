@@ -664,6 +664,16 @@ footer .social-links a {
         flex-direction: column;
     }
     
+    /* Programmes page: add space between image and text when stacked on mobile */
+    .programme-text {
+        margin-top: 28px;
+    }
+    
+    /* About page: add space between profile image and title when stacked on mobile */
+    .trainer-profile-text {
+        margin-top: 28px;
+    }
+    
     /* Navbar brand - prevent overflow */
     .navbar-brand {
         font-size: 16px !important;
