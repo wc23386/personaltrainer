@@ -717,7 +717,7 @@ hr.light {
     margin: 0 auto;
     padding: 0 15px;
     box-sizing: border-box;
-    overflow-x: hidden; /* Prevent horizontal overflow */
+    overflow-x: visible; /* Allow content to be visible, prevent clipping */
 }
 
 /* Ensure all containers respect viewport width */
@@ -742,21 +742,55 @@ hr.light {
     padding: 0 15px;
 }
 
-/* Remove padding for booking form column - align form to left edge */
+/* Booking form container - ensure no clipping and proper alignment */
+.booking-form-row {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
 .booking-form-container {
-    padding-left: 0 !important;
+    padding-left: 15px;
     padding-right: 15px;
+    overflow: visible;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .booking-form-container #bookingForm {
     padding-left: 0;
     padding-right: 0;
+    margin-left: 0;
+    margin-right: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.booking-form-container h2,
+.booking-form-container hr {
+    margin-left: 0;
+    padding-left: 0;
 }
 
 .booking-form-container label,
 .booking-form-container .form-group {
     padding-left: 0;
     margin-left: 0;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    overflow: visible;
+}
+
+.booking-form-container .form-control,
+.booking-form-container input,
+.booking-form-container select,
+.booking-form-container .form-check {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
 @media (min-width: 992px) {

@@ -28,22 +28,32 @@ permalink: /booking.html
 
     <!-- Booking Form Section -->
     <div class="container" style="padding: 80px 0;">
-        <div class="row">
+        <div class="row booking-form-row">
             <div class="col-md-8 booking-form-container">
                 <h2 class="section-heading highlight" id="book">預約表單</h2>
                 <hr>
                 
                 <!-- 
-                    Formspree Setup Instructions:
-                    1. Go to https://formspree.io/ and create a free account
-                    2. Create a new form in your dashboard
-                    3. Copy your form ID (e.g., "xvgkqjpn")
-                    4. Replace "YOUR_FORM_ID" in the form action below with your actual form ID
-                    5. In Formspree dashboard, set email notifications to: givespower.health@gmail.com
+                    Resend Setup Instructions (Already Done!):
                     
-                    Formspree free tier: 50 submissions/month, no sponsor footer!
+                    ✅ Serverless function created: api/send-email.js
+                    
+                    📝 You only need to do this:
+                    1. Sign up for Resend at https://resend.com (if you haven't already)
+                    2. Get your API key from the Resend dashboard (Settings > API Keys)
+                    3. In Vercel:
+                       - Go to your project dashboard
+                       - Click "Settings" → "Environment Variables"
+                       - Add new variable:
+                         Name: RESEND_API_KEY
+                         Value: [paste your Resend API key]
+                         Environment: Production, Preview, Development (select all)
+                       - Click "Save"
+                    4. Redeploy your site (or it will auto-deploy on next push)
+                    
+                    That's it! The form will automatically work after you set the API key.
                 -->
-                <form id="bookingForm" action="https://formspree.io/f/xqeddyqj" method="POST">
+                <form id="bookingForm" method="POST">
                     <div class="form-group">
                         <label for="name">姓名 *</label>
                         <input type="text" class="form-control" id="name" name="name" required placeholder="請輸入您的姓名">
@@ -105,10 +115,6 @@ permalink: /booking.html
                         <button type="submit" class="btn btn-primary btn-lg">提交預約</button>
                     </div>
                     
-                    <!-- Formspree configuration -->
-                    <input type="hidden" name="_subject" value="新預約表單 - 包給力 Givespower.health">
-                    <input type="hidden" name="_replyto" value="">
-                    <input type="hidden" name="_next" id="formNextUrl">
                 </form>
 
                 <div id="formMessage" style="display: none; margin-top: 20px;"></div>
@@ -246,17 +252,20 @@ permalink: /booking.html
         }
     });
     
-    // Form submission validation
-    document.getElementById('bookingForm').addEventListener('submit', function(e) {
+    // Form submission validation and Resend API call
+    document.getElementById('bookingForm').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
         const name = document.getElementById('name').value.trim();
         const phone = document.getElementById('phone').value.trim();
+        const lineId = document.getElementById('line_id').value.trim();
         const contactTime = document.querySelector('input[name="contact_time"]:checked');
         const goal = document.getElementById('goal').value;
+        const messageDiv = document.getElementById('formMessage');
+        const submitBtn = this.querySelector('button[type="submit"]');
         
         // Validate required fields
         if (!name || !phone || !contactTime || !goal) {
-            e.preventDefault();
-            const messageDiv = document.getElementById('formMessage');
             messageDiv.innerHTML = '<div class="alert alert-danger">請填寫所有必填欄位。</div>';
             messageDiv.style.display = 'block';
             return false;
@@ -264,24 +273,73 @@ permalink: /booking.html
         
         // Validate phone number format
         if (!validatePhone(phone)) {
-            e.preventDefault();
             phoneInput.classList.add('is-invalid');
             phoneError.style.display = 'block';
-            const messageDiv = document.getElementById('formMessage');
             messageDiv.innerHTML = '<div class="alert alert-danger">電話號碼必須是10位數字，不含空格、橫線或特殊符號。</div>';
             messageDiv.style.display = 'block';
             phoneInput.focus();
             return false;
         }
         
-        // Set redirect URL for Formspree
-        const currentUrl = window.location.origin + window.location.pathname;
-        document.getElementById('formNextUrl').value = currentUrl + '?success=true';
-        
         // Show loading state
-        const submitBtn = this.querySelector('button[type="submit"]');
         submitBtn.disabled = true;
         submitBtn.textContent = '提交中...';
+        messageDiv.style.display = 'none';
+        
+        // Prepare email content
+        const emailContent = `
+新預約表單 - 包給力 Givespower.health
+
+姓名: ${name}
+電話: ${phone}
+Line ID: ${lineId || '未提供'}
+可聯絡時段: ${contactTime.value}
+運動目標: ${goal}
+
+提交時間: ${new Date().toLocaleString('zh-TW', { timeZone: 'Asia/Taipei' })}
+        `.trim();
+        
+        try {
+            // Send to Resend API via serverless function
+            const response = await fetch('/api/send-email', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    to: 'givespower.health@gmail.com',
+                    subject: '新預約表單 - 包給力 Givespower.health',
+                    text: emailContent,
+                    replyTo: lineId ? `${lineId}@line.me` : undefined
+                })
+            });
+            
+            const result = await response.json();
+            
+            if (response.ok) {
+                // Success
+                messageDiv.innerHTML = '<div class="alert alert-success">預約表單已成功提交！我們會盡快與您聯絡。</div>';
+                messageDiv.style.display = 'block';
+                
+                // Reset form
+                this.reset();
+                phoneInput.classList.remove('is-valid', 'is-invalid');
+                phoneError.style.display = 'none';
+                
+                // Scroll to message
+                messageDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            } else {
+                throw new Error(result.error || '提交失敗');
+            }
+        } catch (error) {
+            console.error('Form submission error:', error);
+            messageDiv.innerHTML = '<div class="alert alert-danger">提交失敗，請稍後再試或直接透過 Line 聯絡我們。</div>';
+            messageDiv.style.display = 'block';
+        } finally {
+            // Reset button state
+            submitBtn.disabled = false;
+            submitBtn.textContent = '提交預約';
+        }
     });
     </script>
 </body>
