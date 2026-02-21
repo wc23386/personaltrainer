@@ -112,8 +112,15 @@ a:hover {
     margin-left: 10px;
 }
 
-/* Mobile navigation - align 預約體驗 to left */
+/* Mobile navigation - balanced horizontal padding so menu isn’t flush left */
 @media (max-width: 991px) {
+    .navbar-collapse {
+        padding-left: 20px;
+        padding-right: 20px;
+        padding-top: 12px;
+        padding-bottom: 12px;
+    }
+    
     .navbar-nav {
         text-align: left !important;
         padding-left: 0 !important;
@@ -128,6 +135,7 @@ a:hover {
         text-align: left !important;
         justify-content: flex-start !important;
         padding-left: 0 !important;
+        padding-right: 0 !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
     }
@@ -140,7 +148,7 @@ a:hover {
         margin-top: 10px !important;
         margin-bottom: 10px !important;
         display: block !important;
-        padding-left: 0 !important;
+        padding-left: 20px !important;
         padding-right: 20px !important;
         padding-top: 8px !important;
         padding-bottom: 8px !important;
@@ -252,6 +260,7 @@ header {
     margin-bottom: 20px;
 }
 
+/* Heading scale: h1 > h2 > h3 > h4. Desktop uses Bootstrap (h1 40px, h2 32px, h3 28px, h4 24px) plus inline overrides where set. Mobile scale in @media below. */
 /* Section Headings: DMC 742 light tangerine for index main; DMC 782 elsewhere */
 .section-heading {
     color: var(--dmc-782-dark-topaz);
@@ -579,7 +588,10 @@ footer .social-links a {
     color: var(--dmc-782-dark-topaz);
 }
 
-/* Responsive - Mobile text overflow fixes */
+/* Responsive - Mobile: heading scale (h1 > h2 > h3 > h4) proportionally reduced
+ * 768px: h1=28, h2=24, h3=20, h4=18
+ * 480px: h1=24, h2=20, h3=17, h4=15
+ */
 @media (max-width: 768px) {
     /* Container padding for mobile */
     .container {
@@ -637,6 +649,26 @@ footer .social-links a {
         box-sizing: border-box;
     }
     
+    /* Blog post page: enough top padding so title isn’t cut off by fixed nav; smaller bottom padding */
+    .post-page-header {
+        padding: 85px 0 85px !important;
+    }
+    
+    /* Blog post page: center content column and body text on mobile */
+    .post-content-col {
+        margin-left: 0 !important;
+    }
+    .post-body,
+    .post-body p,
+    .post-body h1, .post-body h2, .post-body h3, .post-body h4 {
+        text-align: center;
+    }
+    .post-body ul, .post-body ol {
+        display: inline-block;
+        text-align: left;
+        padding-left: 24px;
+    }
+    
     /* General header content */
     .header-content h1 {
         font-size: 28px;
@@ -660,31 +692,61 @@ footer .social-links a {
         padding: 0 10px;
     }
     
-    /* CTA sections */
+    /* Section headings: consistent h2 > h3 > h4 */
     section h2 {
         font-size: 24px !important;
         word-wrap: break-word;
         overflow-wrap: break-word;
         padding: 0 10px;
     }
+    section h3 {
+        font-size: 20px !important;
+    }
+    section h4 {
+        font-size: 18px !important;
+    }
+    .programme-text h2 {
+        font-size: 24px !important;
+    }
     
     .programme-card {
         flex-direction: column;
     }
     
-    /* Programmes page: add space between image and text when stacked on mobile */
+    /* Programmes page: add space between image and text; inset content (incl. lists) from edges on mobile */
     .programme-text {
         margin-top: 28px;
+        padding-left: 28px !important;
+        padding-right: 28px !important;
+        box-sizing: border-box;
+    }
+    
+    .programme-text ul {
+        padding-left: 24px !important;
+        margin-left: 0;
     }
     
     /* About page: add space between profile image and title when stacked on mobile */
     .trainer-profile-text {
         margin-top: 28px;
+        padding-left: 28px !important;
+        padding-right: 28px !important;
+        box-sizing: border-box;
+    }
+    
+    .trainer-profile-text ul {
+        padding-left: 24px !important;
+        margin-left: 0;
     }
     
     /* Blog page: center article blocks on mobile (offset pushes them right otherwise) */
     .blog-post-row .col-md-offset-2 {
         margin-left: 0;
+    }
+    
+    /* Blog page: add space between post image and title when stacked on mobile */
+    .blog-post-text {
+        margin-top: 24px;
     }
     
     /* Navbar brand - prevent overflow */
@@ -720,6 +782,15 @@ footer .social-links a {
     }
     
     section h2 {
+        font-size: 20px !important;
+    }
+    section h3 {
+        font-size: 17px !important;
+    }
+    section h4 {
+        font-size: 15px !important;
+    }
+    .programme-text h2 {
         font-size: 20px !important;
     }
     

@@ -43,7 +43,7 @@ permalink: /blog.html
                         <div class="col-md-4">
                             <img src="{{ post.image | relative_url }}" class="img-responsive" alt="{{ post.title }}" style="width: 100%; border-radius: 5px;">
                         </div>
-                        <div class="col-md-8">
+                        <div class="col-md-8 blog-post-text">
                             <h3 class="highlight">{{ post.title }}</h3>
                             <p class="text-muted">
                                 {{ post.date | date: "%Y年%m月%d日" }}

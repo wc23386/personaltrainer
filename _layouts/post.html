@@ -11,7 +11,7 @@
 <body>
     {% include nav.html %}
 
-    <header class="page-header" style="padding: 100px 0 60px;">
+    <header class="page-header post-page-header" style="padding: 100px 0 60px;">
         <div class="container text-center">
             <h1 style="font-size: 42px; font-weight: bold; margin-bottom: 15px;">{{ page.title }}</h1>
             <p class="text-muted" style="font-size: 18px;">
@@ -29,13 +29,13 @@
 
     <div class="container" style="padding: 50px 0 80px;">
         <div class="row">
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-8 col-md-offset-2 post-content-col">
                 {% if page.image %}
                 <p class="text-center" style="margin-top: 0; margin-bottom: 30px;">
                     <img src="{{ page.image | relative_url }}" class="img-responsive" alt="{{ page.title }}" style="width: 100%; max-width: 500px; border-radius: 5px;">
                 </p>
                 {% endif %}
-                <div class="blog-post-content">
+                <div class="blog-post-content post-body">
                     {{ content }}
                 </div>
                 {% if page.ig_link %}
