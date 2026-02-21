@@ -3,10 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>test - 包給力 Givespower.health</title>
+    <title>成功案例編輯器 - 包給力 Givespower.health</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="/css/style.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <style>
+        .editor-section { max-width: 700px; margin: 0 auto; }
+        .field-hint { font-size: 0.875rem; color: #6c757d; }
+    </style>
 </head>
 <body>
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
@@ -107,30 +111,45 @@
 </style>
 
 
-    <header class="page-header post-page-header" style="padding: 100px 0 60px;">
+    <header class="page-header" style="padding: 100px 0 60px;">
         <div class="container text-center">
-            <h1 style="font-size: 42px; font-weight: bold; margin-bottom: 15px;">test</h1>
-            <p class="text-muted" style="font-size: 18px;">
-                2026年02月21日
-                
-            </p>
+            <h1 style="font-size: 42px; font-weight: bold; margin-bottom: 15px;">成功案例編輯器</h1>
+            <p class="lead" style="font-size: 18px;">填寫下方欄位後按「儲存」，會直接寫入專案並於下次建站後顯示於<a href="/testimonials.html">成功案例</a>。</p>
         </div>
     </header>
 
-    <div class="container" style="padding: 50px 0 80px;">
-        <div class="row">
-            <div class="col-md-8 col-md-offset-2 post-content-col">
-                
-                <div class="blog-post-content post-body">
-                    <p>#TEST
-##test</p>
-
+    <div class="container" style="padding: 40px 0 80px;">
+        <div class="editor-section">
+            <form id="testimonialForm" class="border rounded p-4 bg-light">
+                <div class="form-group">
+                    <label for="tName">客戶名稱 (name) *</label>
+                    <input type="text" class="form-control" id="tName" required placeholder="例：32歲丁小姐 上班族">
                 </div>
-                
-                <p style="margin-top: 40px;">
-                    <a href="/blog.html" class="btn btn-default">&laquo; 返回專業分享</a>
-                </p>
-            </div>
+                <div class="form-group">
+                    <label for="tCategory">類別 (category) *</label>
+                    <input type="text" class="form-control" id="tCategory" required placeholder="例：減重成功、樂齡減重、體態改善">
+                </div>
+                <div class="form-group">
+                    <label for="tContent">見證內容 (content) *</label>
+                    <textarea class="form-control" id="tContent" rows="5" required placeholder="客戶的成功故事或心得"></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="tInstagram">Instagram 連結 (instagram)</label>
+                    <input type="url" class="form-control" id="tInstagram" placeholder="https://www.instagram.com/givespower.health">
+                    <small class="field-hint">選填，未填則使用預設 givespower.health</small>
+                </div>
+                <div class="form-group">
+                    <label for="tImageFile">上傳客戶照片 (image)</label>
+                    <input type="file" class="form-control-file" id="tImageFile" accept="image/jpeg,image/png,image/gif,image/webp">
+                    <small class="field-hint">選填。會儲存為 <code>img/testimonials/<em>名稱</em>.jpg</code>。未上傳則使用 default.jpg。最大 4MB。</small>
+                    <div id="tImagePreview" class="mt-2" style="display: none;"><img id="tImagePreviewImg" src="" alt="預覽" style="max-height: 120px; border-radius: 6px;"></div>
+                </div>
+                <div id="tFormAlert" class="alert mb-3" style="display: none;" role="alert"></div>
+                <div class="form-group mb-0">
+                    <button type="submit" class="btn btn-primary" id="tBtnSubmit">儲存成功案例</button>
+                    <button type="button" class="btn btn-outline-secondary ml-2" id="tBtnReset">清空表單</button>
+                </div>
+            </form>
         </div>
     </div>
 
@@ -245,5 +264,114 @@ footer p {
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+(function() {
+    var form = document.getElementById('testimonialForm');
+    var formAlert = document.getElementById('tFormAlert');
+    var btnSubmit = document.getElementById('tBtnSubmit');
+    var tImageFile = document.getElementById('tImageFile');
+    var tImagePreview = document.getElementById('tImagePreview');
+    var tImagePreviewImg = document.getElementById('tImagePreviewImg');
+
+    function showAlert(msg, isSuccess) {
+        formAlert.textContent = msg;
+        formAlert.className = 'alert mb-3 ' + (isSuccess ? 'alert-success' : 'alert-danger');
+        formAlert.style.display = 'block';
+    }
+    function hideAlert() { formAlert.style.display = 'none'; }
+
+    function readFileAsBase64(file) {
+        return new Promise(function(resolve, reject) {
+            var fr = new FileReader();
+            fr.onload = function() {
+                var data = fr.result;
+                if (data.indexOf('base64,') >= 0) data = data.split('base64,')[1];
+                resolve(data);
+            };
+            fr.onerror = reject;
+            fr.readAsDataURL(file);
+        });
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        hideAlert();
+        var name = document.getElementById('tName').value.trim();
+        var category = document.getElementById('tCategory').value.trim();
+        var content = document.getElementById('tContent').value.trim();
+        var instagram = document.getElementById('tInstagram').value.trim();
+        if (!name || !category || !content) {
+            showAlert('請填寫名稱、類別與見證內容。', false);
+            return;
+        }
+        var payload = { name: name, category: category, content: content };
+        if (instagram) payload.instagram = instagram;
+        var file = tImageFile.files[0];
+        if (file) {
+            if (file.size > 4 * 1024 * 1024) {
+                showAlert('圖片不得超過 4MB。', false);
+                return;
+            }
+            readFileAsBase64(file).then(function(base64) {
+                var ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+                if (!/^(jpe?g|png|gif|webp)$/.test(ext)) ext = 'jpg';
+                payload.image = { data: base64, extension: ext };
+                doSave(payload);
+            }).catch(function() { showAlert('無法讀取圖片，請重試。', false); });
+        } else {
+            doSave(payload);
+        }
+    });
+
+    function doSave(payload) {
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = '儲存中…';
+        fetch('/api/save-testimonial', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(function(res) {
+            return res.text().then(function(text) {
+                var data;
+                try { data = JSON.parse(text); } catch (e) {
+                    if (text.trim().indexOf('<!') === 0 || text.trim().indexOf('<') === 0) {
+                        showAlert('目前網址沒有提供 API。請用 vercel dev 在 http://localhost:3000 開啟本頁，或於正式站使用。', false);
+                        return;
+                    }
+                    showAlert('伺服器回傳格式錯誤。', false);
+                    return;
+                }
+                if (res.ok) {
+                    formAlert.className = 'alert alert-success mb-3';
+                    formAlert.innerHTML = (data.message || '成功案例已儲存。') + ' 請 <code>git pull</code> 後重建，或於 <a href="/testimonials.html">成功案例</a> 頁面查看。';
+                    formAlert.style.display = 'block';
+                } else {
+                    showAlert(data.error || '儲存失敗。', false);
+                }
+            });
+        }).catch(function(err) {
+            showAlert('連線錯誤：' + (err.message || '請確認已用 vercel dev 或正式站。'), false);
+        }).finally(function() {
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = '儲存成功案例';
+        });
+    }
+
+    document.getElementById('tBtnReset').addEventListener('click', function() {
+        form.reset();
+        tImageFile.value = '';
+        tImagePreview.style.display = 'none';
+        tImagePreviewImg.src = '';
+        hideAlert();
+    });
+
+    tImageFile.addEventListener('change', function() {
+        var file = this.files[0];
+        if (!file) { tImagePreview.style.display = 'none'; tImagePreviewImg.src = ''; return; }
+        tImagePreviewImg.src = URL.createObjectURL(file);
+        tImagePreview.style.display = 'block';
+    });
+})();
+    </script>
 </body>
 </html>

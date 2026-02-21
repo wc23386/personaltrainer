@@ -28,3 +28,20 @@
 
 - 使用 `vercel dev` 在本地跑含 API 的環境，或
 - 部署到 Vercel 後在正式/預覽網址使用文章編輯器
+
+---
+
+## save-testimonial（儲存成功案例）
+
+用於成功案例編輯器，將一筆見證寫入 `_data/testimonials.yml` 並可上傳照片至 `img/testimonials/`。
+
+### 環境變數
+
+與 save-post 相同：`GITHUB_TOKEN`、`GITHUB_REPO`、選填 `GITHUB_BRANCH`。
+
+### 行為
+
+- 接收 POST JSON：`name`, `category`, `content` 必填；選填 `instagram`、`image: { data: base64, extension }`
+- 讀取現有 `_data/testimonials.yml`，於檔尾追加一筆 YAML
+- 若有上傳圖片：寫入 `img/testimonials/<名稱衍生>.jpg`（或對應副檔名）
+- 儲存後執行 `git pull` 或等正式站重建，即可在「成功案例」頁面看到
