@@ -24,3 +24,8 @@ Gemfile.lock
 # OS
 .DS_Store
 Thumbs.db
+
+# Environment variables
+.env
+.vercel
+.env*.local

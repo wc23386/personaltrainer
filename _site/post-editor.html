@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>文章編輯器 - 包給力 Givespower.health</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+    <style>
+        .post-editor-section { max-width: 900px; margin: 0 auto; }
+        #outputMarkdown { font-family: monospace; font-size: 13px; min-height: 280px; }
+        .field-hint { font-size: 0.875rem; color: #6c757d; }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top">
+    <div class="container">
+        <a class="navbar-brand" href="/">
+            <img src="/img/logo/logo.png" alt="包給力 Givespower.health" style="max-height: 40px; margin-right: 10px;">
+            <!-- 包給力 Givespower.health -->
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/">首頁</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/about.html">關於我們</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/programmes.html">課程介紹</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/testimonials.html">成功案例</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/blog.html">專業分享</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link " href="/faq.html">常見問題</a>
+                </li>
+                
+                
+                
+                <li class="nav-item">
+                    <a class="nav-link btn btn-primary " href="/booking.html">預約體驗</a>
+                </li>
+                
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<style>
+/* Navbar: DMC 782 dark topaz toggler */
+.navbar-toggler {
+    border-color: var(--dmc-782-dark-topaz);
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='%23AE7720' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+}
+
+@media (max-width: 991px) {
+    .navbar-collapse {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+    .navbar-nav {
+        padding-left: 0 !important;
+    }
+    .navbar-nav .nav-item {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+    }
+    .navbar-nav .nav-link {
+        padding-left: 0 !important;
+        margin-left: 0 !important;
+        text-align: left !important;
+    }
+    .navbar-nav .nav-link.btn-primary {
+        margin: 10px 0 !important;
+        margin-left: 0 !important;
+        padding-left: 20px !important;
+        padding-right: 20px !important;
+        text-align: left !important;
+        width: 100% !important;
+    }
+}
+</style>
+
+
+    <header class="page-header" style="padding: 100px 0 60px;">
+        <div class="container text-center">
+            <h1 style="font-size: 42px; font-weight: bold; margin-bottom: 15px;">部落格文章編輯器</h1>
+            <p class="lead" style="font-size: 18px;">填寫下方欄位後按「儲存文章」，會直接寫入專案並於下次建站後顯示於<a href="/blog.html">專業分享</a>。</p>
+        </div>
+    </header>
+
+    <div class="container" style="padding: 40px 0 80px;">
+        <div class="post-editor-section">
+            <div class="row">
+                <div class="col-12">
+                    <ul class="nav nav-tabs mb-3" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="form-tab" data-toggle="tab" href="#form-panel" role="tab">表單編輯</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="import-tab" data-toggle="tab" href="#import-panel" role="tab">從現有文章載入</a>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="form-panel" role="tabpanel">
+                            <form id="postForm" class="border rounded p-4 bg-light">
+                                <div class="form-group">
+                                    <label for="postTitle">標題 (title) *</label>
+                                    <input type="text" class="form-control" id="postTitle" required placeholder="例：突破減重平台期的五大策略">
+                                </div>
+                                <div class="form-row">
+                                    <div class="form-group col-md-6">
+                                        <label for="postDate">日期 (date) *</label>
+                                        <input type="date" class="form-control" id="postDate" required>
+                                        <small class="field-hint">格式 YYYY-MM-DD，檔名會用此日期</small>
+                                    </div>
+                                    <div class="form-group col-md-6">
+                                        <label for="postSlug">網址代稱 (slug) *</label>
+                                        <input type="text" class="form-control" id="postSlug" required placeholder="例：plateau-strategies" pattern="[a-z0-9-]+" title="僅小寫英文、數字、連字號">
+                                        <small class="field-hint">用於 permalink：/blog/<strong>slug</strong>.html 與檔名 <em>YYYY-MM-DD-<strong>slug</strong>.md</em></small>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="postImageFile">上傳文章主圖 (image)</label>
+                                    <input type="file" class="form-control-file" id="postImageFile" accept="image/jpeg,image/png,image/gif,image/webp">
+                                    <small class="field-hint">選填。會儲存為 <code>img/programs/blog_<em>slug</em>.jpg</code>（依副檔名）。最大 4MB。</small>
+                                    <div id="imagePreview" class="mt-2" style="display: none;"><img id="imagePreviewImg" src="" alt="預覽" style="max-height: 120px; border-radius: 6px;"></div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="postExcerpt">摘要 (excerpt) *</label>
+                                    <textarea class="form-control" id="postExcerpt" rows="2" required placeholder="列表頁與預覽顯示的簡短描述"></textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="postIgLink">Instagram 貼文連結 (ig_link)</label>
+                                    <input type="url" class="form-control" id="postIgLink" placeholder="https://www.instagram.com/...">
+                                    <small class="field-hint">選填，有則文章會顯示「查看 Instagram 貼文」</small>
+                                </div>
+                                <div class="form-group">
+                                    <label for="postBody">內文 (Markdown) *</label>
+                                    <textarea class="form-control" id="postBody" rows="12" required placeholder="支援 Markdown：## 標題、**粗體**、列表等"></textarea>
+                                </div>
+                                <div id="formAlert" class="alert mb-3" style="display: none;" role="alert"></div>
+                                <div class="form-group mb-0">
+                                    <button type="submit" class="btn btn-primary" id="btnSubmit">儲存文章</button>
+                                    <button type="button" class="btn btn-outline-secondary ml-2" id="btnPreview">預覽 Markdown</button>
+                                    <button type="button" class="btn btn-outline-secondary ml-2" id="btnReset">清空表單</button>
+                                </div>
+                            </form>
+                        </div>
+
+                        <div class="tab-pane fade" id="import-panel" role="tabpanel">
+                            <div class="border rounded p-4 bg-light">
+                                <label for="importMarkdown">貼上現有文章的完整 Markdown（含 front matter）</label>
+                                <textarea class="form-control" id="importMarkdown" rows="10" placeholder="貼上 _posts/*.md 的內容後按「載入到表單」"></textarea>
+                                <button type="button" class="btn btn-primary mt-2" id="btnImport">載入到表單</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mt-4" id="outputSection" style="display: none;">
+                <div class="col-12">
+                    <h3 class="highlight">預覽 Markdown</h3>
+                    <p class="field-hint">備用：可下載為 <code>_posts/YYYY-MM-DD-slug.md</code> 手動放入專案。</p>
+                    <textarea class="form-control" id="outputMarkdown" readonly></textarea>
+                    <div class="mt-2">
+                        <button type="button" class="btn btn-outline-success" id="btnDownload"><i class="bi bi-download"></i> 下載 .md 檔</button>
+                        <button type="button" class="btn btn-outline-primary ml-2" id="btnCopy">複製到剪貼簿</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <h4>關於我們</h4>
+                <p>包給力 Givespower.health 專注於提供專業的個人訓練服務，幫助您達成健康與健身目標。我們的專業教練團隊擁有豐富的經驗，為您量身打造最適合的訓練計劃。</p>
+            </div>
+            <div class="col-md-4">
+                <h4>快速連結</h4>
+                <ul class="list-unstyled">
+                    <li><a href="/">首頁</a></li>
+                    <li><a href="/about.html">關於我們</a></li>
+                    <li><a href="/programmes.html">課程介紹</a></li>
+                    <li><a href="/testimonials.html">成功案例</a></li>
+                    <li><a href="/blog.html">專業分享</a></li>
+                    <li><a href="/faq.html">常見問題</a></li>
+                    <li><a href="/booking.html">預約體驗</a></li>
+                </ul>
+            </div>
+            <div class="col-md-4">
+                <h4>聯絡我們</h4>
+                <p>
+                    <strong>Line:</strong> <a href="https://lin.ee/Umt7lpD" target="_blank" rel="noopener noreferrer">@givespower.health</a><br>
+                    <strong>Instagram:</strong> <a href="https://www.instagram.com/givespower.health" target="_blank" rel="noopener noreferrer">@givespower.health</a><br>
+                    <strong>Email:</strong> givespower.health@gmail.com
+                </p>
+                <div class="social-links">
+                    <a href="https://lin.ee/Umt7lpD" target="_blank" rel="noopener noreferrer" title="LINE">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                            <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.349 0-.63-.285-.63-.63V8.108c0-.345.281-.63.63-.63h2.386c.349 0 .63.285.63.63 0 .346-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.63-.631.63-.346 0-.63-.286-.63-.63V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.63-.63.63-.345 0-.63-.286-.63-.63V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.771zm-2.466.63H4.917c-.348 0-.63-.286-.63-.63V8.108c0-.345.282-.63.63-.63.349 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.039 1.085l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+                        </svg>
+                    </a>
+                    <a href="https://www.instagram.com/givespower.health" target="_blank" rel="noopener noreferrer" title="Instagram">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <hr>
+        <div class="row text-center">
+            <div class="col-md-12">
+                <p>&copy; 2026 包給力 Givespower.health. All rights reserved.</p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<style>
+/* Footer: DMC palette */
+footer {
+    background-color: var(--dmc-413-dark-pewter-gray);
+    color: var(--white);
+    padding: 40px 0 20px;
+}
+
+footer a {
+    color: var(--dmc-727-very-light-topaz);
+    transition: color 0.3s ease;
+}
+
+footer a:hover {
+    color: var(--dmc-742-light-tangerine);
+}
+
+footer h4 {
+    color: var(--dmc-727-very-light-topaz);
+    margin-bottom: 20px;
+    font-weight: bold;
+}
+
+footer ul {
+    list-style: none;
+    padding: 0;
+}
+
+footer ul li {
+    margin-bottom: 10px;
+}
+
+footer .social-links {
+    margin-top: 20px;
+}
+
+footer .social-links a {
+    display: inline-block;
+    margin: 0 10px;
+    color: var(--dmc-727-very-light-topaz);
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+footer .social-links a:hover {
+    transform: translateY(-3px);
+    color: var(--dmc-742-light-tangerine);
+}
+
+footer hr {
+    border-color: rgba(255, 255, 255, 0.1);
+    margin: 30px 0;
+}
+
+footer p {
+    margin-bottom: 10px;
+}
+</style>
+
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+(function() {
+    var form = document.getElementById('postForm');
+    var outputSection = document.getElementById('outputSection');
+    var outputMarkdown = document.getElementById('outputMarkdown');
+    var formAlert = document.getElementById('formAlert');
+    var btnSubmit = document.getElementById('btnSubmit');
+    var postImageFile = document.getElementById('postImageFile');
+    var imagePreview = document.getElementById('imagePreview');
+    var imagePreviewImg = document.getElementById('imagePreviewImg');
+
+    function escapeYaml(str) {
+        if (!str || !str.trim()) return '';
+        var s = String(str).trim();
+        if (s.indexOf(':') >= 0 || s.indexOf('\n') >= 0 || s.indexOf('"') >= 0 || s.indexOf("'") >= 0)
+            return '"' + s.replace(/\\/g, '\\\\').replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"';
+        return s;
+    }
+
+    function getSlug() {
+        return document.getElementById('postSlug').value.trim().toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-') || 'post';
+    }
+
+    function buildMarkdown(includeImagePath) {
+        var title = document.getElementById('postTitle').value.trim();
+        var date = document.getElementById('postDate').value.trim();
+        var slug = getSlug();
+        var excerpt = document.getElementById('postExcerpt').value.trim();
+        var igLink = document.getElementById('postIgLink').value.trim();
+        var body = document.getElementById('postBody').value.trim();
+        var lines = ['---', 'layout: post', 'title: ' + escapeYaml(title), 'date: ' + date];
+        if (includeImagePath && postImageFile.files.length) {
+            var ext = (postImageFile.files[0].name.split('.').pop() || 'jpg').toLowerCase();
+            if (!/^(jpe?g|png|gif|webp)$/.test(ext)) ext = 'jpg';
+            lines.push('image: /img/programs/blog_' + slug + '.' + ext);
+        }
+        lines.push('excerpt: ' + escapeYaml(excerpt), 'permalink: /blog/' + slug + '.html');
+        if (igLink) lines.push('ig_link: ' + igLink);
+        lines.push('---', '', body, '');
+        return lines.join('\n');
+    }
+
+    function setToday() {
+        var d = new Date();
+        document.getElementById('postDate').value = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+    setToday();
+
+    function showAlert(msg, isSuccess) {
+        formAlert.textContent = msg;
+        formAlert.className = 'alert mb-3 ' + (isSuccess ? 'alert-success' : 'alert-danger');
+        formAlert.style.display = 'block';
+    }
+    function hideAlert() {
+        formAlert.style.display = 'none';
+    }
+
+    function readFileAsBase64(file) {
+        return new Promise(function(resolve, reject) {
+            var fr = new FileReader();
+            fr.onload = function() {
+                var data = fr.result;
+                if (data.indexOf('base64,') >= 0) data = data.split('base64,')[1];
+                resolve(data);
+            };
+            fr.onerror = reject;
+            fr.readAsDataURL(file);
+        });
+    }
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        hideAlert();
+        var title = document.getElementById('postTitle').value.trim();
+        var date = document.getElementById('postDate').value.trim();
+        var slug = getSlug();
+        var excerpt = document.getElementById('postExcerpt').value.trim();
+        var content = document.getElementById('postBody').value.trim();
+        var igLink = document.getElementById('postIgLink').value.trim();
+        if (!title || !date || !slug || !excerpt || !content) {
+            showAlert('請填寫所有必填欄位。', false);
+            return;
+        }
+        var payload = {
+            title: title,
+            date: date,
+            slug: slug,
+            excerpt: excerpt,
+            content: content,
+            ig_link: igLink || undefined
+        };
+        var file = postImageFile.files[0];
+        if (file) {
+            if (file.size > 4 * 1024 * 1024) {
+                showAlert('圖片不得超過 4MB。', false);
+                return;
+            }
+            readFileAsBase64(file).then(function(base64) {
+                var ext = (file.name.split('.').pop() || 'jpg').toLowerCase();
+                if (!/^(jpe?g|png|gif|webp)$/.test(ext)) ext = 'jpg';
+                payload.image = { data: base64, extension: ext };
+                doSave(payload);
+            }).catch(function() {
+                showAlert('無法讀取圖片，請重試。', false);
+            });
+        } else {
+            doSave(payload);
+        }
+    });
+
+    function doSave(payload) {
+        btnSubmit.disabled = true;
+        btnSubmit.textContent = '儲存中…';
+        fetch('/api/save-post', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        }).then(function(res) {
+            return res.text().then(function(text) {
+                var data;
+                try {
+                    data = JSON.parse(text);
+                } catch (e) {
+                    if (text.trim().indexOf('<!') === 0 || text.trim().indexOf('<') === 0) {
+                        showAlert('目前開啟的網址沒有提供 API。請用「vercel dev」啟動後，在 http://localhost:3000/post-editor.html 開啟本頁再試。（若用 jekyll serve 或 localhost:4001，儲存功能無法使用）', false);
+                        return;
+                    }
+                    showAlert('伺服器回傳格式錯誤，請稍後再試。', false);
+                    return;
+                }
+                if (res.ok) {
+                    formAlert.className = 'alert alert-success mb-3';
+                    formAlert.innerHTML = (data.message || '文章已儲存至 GitHub。')
+                        + ' 本地預覽：請在專案目錄執行 <code>git pull</code> 取得新文章，vercel dev 會自動重建後即可在 <a href="/blog.html">專業分享</a> 看到。'
+                        + ' 正式站：推送後 Vercel 會自動建站。';
+                    formAlert.style.display = 'block';
+                } else {
+                    showAlert(data.error || '儲存失敗，請稍後再試。', false);
+                }
+            });
+        }).catch(function(err) {
+            showAlert('連線錯誤：' + (err.message || '請確認已用 vercel dev 在 localhost:3000 開啟本頁。'), false);
+        }).finally(function() {
+            btnSubmit.disabled = false;
+            btnSubmit.textContent = '儲存文章';
+        });
+    }
+
+    document.getElementById('btnPreview').addEventListener('click', function() {
+        outputMarkdown.value = buildMarkdown(true);
+        outputSection.style.display = 'block';
+        outputSection.scrollIntoView({ behavior: 'smooth' });
+    });
+
+    document.getElementById('btnReset').addEventListener('click', function() {
+        form.reset();
+        setToday();
+        postImageFile.value = '';
+        imagePreview.style.display = 'none';
+        imagePreviewImg.src = '';
+        outputSection.style.display = 'none';
+        outputMarkdown.value = '';
+        hideAlert();
+    });
+
+    document.getElementById('btnDownload').addEventListener('click', function() {
+        var date = document.getElementById('postDate').value.trim();
+        var slug = getSlug();
+        var filename = (date || 'YYYY-MM-DD') + '-' + slug + '.md';
+        var blob = new Blob([outputMarkdown.value], { type: 'text/markdown;charset=utf-8' });
+        var a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = filename;
+        a.click();
+        URL.revokeObjectURL(a.href);
+    });
+
+    document.getElementById('btnCopy').addEventListener('click', function() {
+        outputMarkdown.select();
+        document.execCommand('copy');
+        var btn = this;
+        var orig = btn.textContent;
+        btn.textContent = '已複製！';
+        setTimeout(function() { btn.textContent = orig; }, 2000);
+    });
+
+    postImageFile.addEventListener('change', function() {
+        var file = this.files[0];
+        if (!file) {
+            imagePreview.style.display = 'none';
+            imagePreviewImg.src = '';
+            return;
+        }
+        var url = URL.createObjectURL(file);
+        imagePreviewImg.src = url;
+        imagePreview.style.display = 'block';
+    });
+
+    document.getElementById('btnImport').addEventListener('click', function() {
+        var raw = document.getElementById('importMarkdown').value;
+        var match = raw.match(/^---\s*\n([\s\S]*?)\n---\s*\n([\s\S]*)$/);
+        if (!match) {
+            alert('無法解析：請貼上包含 --- ... --- 的完整文章內容。');
+            return;
+        }
+        var fm = match[1];
+        var body = match[2].trim();
+        function getFm(key) {
+            var re = new RegExp('^' + key + ':\\s*(.+)$', 'm');
+            var m = fm.match(re);
+            return m ? m[1].trim().replace(/^["']|["']$/g, '') : '';
+        }
+        document.getElementById('postTitle').value = getFm('title') || '';
+        document.getElementById('postDate').value = (getFm('date') || '').slice(0, 10);
+        var permalink = getFm('permalink') || '';
+        var slugMatch = permalink.match(/\/blog\/(.+)\.html$/);
+        document.getElementById('postSlug').value = slugMatch ? slugMatch[1] : '';
+        document.getElementById('postExcerpt').value = getFm('excerpt') || '';
+        document.getElementById('postIgLink').value = getFm('ig_link') || '';
+        document.getElementById('postBody').value = body;
+        postImageFile.value = '';
+        imagePreview.style.display = 'none';
+        document.getElementById('form-tab').click();
+    });
+})();
+    </script>
+</body>
+</html>
