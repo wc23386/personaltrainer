@@ -61,7 +61,10 @@ export default async function handler(req, res) {
 
   if (!token || !repoFull) {
     console.error('GITHUB_TOKEN or GITHUB_REPO not set');
-    return res.status(500).json({ error: 'Server not configured for saving posts' });
+    const missing = []; if (!token) missing.push('GITHUB_TOKEN'); if (!repoFull) missing.push('GITHUB_REPO');
+    return res.status(500).json({
+      error: 'Server not configured for saving posts. In Vercel: Project → Settings → Environment Variables, add ' + missing.join(' and ') + ' (for Production + Preview), then redeploy.',
+    });
   }
 
   const [owner, repo] = repoFull.split('/').filter(Boolean);
