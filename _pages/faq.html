@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 常見問題 - 包給力 Givespower.health
+title: 常見問題 - DUO FITNESS
 permalink: /faq.html
 ---
 <!DOCTYPE html>
@@ -14,14 +14,15 @@ permalink: /faq.html
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
+    {% assign brand = site.data.brand %}
     {% include nav.html %}
     <!-- Header -->
     <header class="page-header" style="padding: 150px 0 100px;">
         <div class="container text-center">
-            <img src="{{ '/img/logo/logo.png' | relative_url }}" alt="包給力 Givespower.health" class="logo" style="max-width: 200px; margin-bottom: 30px;">
+            <img src="{{ brand.logo.header | relative_url }}" alt="{{ brand.name }}" class="logo" style="max-width: 200px; margin-bottom: 30px;">
             <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">常見問題</h1>
             <h3 class="lead highlight" style="font-size: 24px; margin-bottom: 30px;">關於我們的訓練課程，<br class="d-md-none">您可能想知道的問題</h3>
-            <a href="https://lin.ee/Umt7lpD" target="_blank" class="page-scroll btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">立即預約體驗</a>
+            <a href="{{ brand.cta.booking_url }}" target="_blank" rel="noopener noreferrer" class="page-scroll btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">{{ brand.cta.booking_label }}</a>
         </div>
     </header>
 
@@ -69,7 +70,7 @@ permalink: /faq.html
                             私人訓練通過專家的密切指導幫助您安全地學習新練習。雖然您可以在沒有指導的情況下自己嘗試學習，但從一開始就正確地學習每個動作更安全且更省時間。
                         </p>
                         <p class="text-justify fontblack">
-                            通過投資包給力 Givespower.health，您有機會利用我多年的經驗更快地達成結果，如果單獨嘗試，您將需要更長時間並經過大量的試錯才能達成（如果可能的話）。
+                            通過投資 {{ brand.name }}，您有機會利用我多年的經驗更快地達成結果，如果單獨嘗試，您將需要更長時間並經過大量的試錯才能達成（如果可能的話）。
                         </p>
                         <p class="text-justify fontblack">
                             我也將擁有知識來匹配強度以適應您的能力，並為您提供深入的訓練體驗，將您推向舒適區的邊緣。
@@ -154,8 +155,8 @@ permalink: /faq.html
             <h2 style="font-size: 36px; font-weight: bold; margin-bottom: 20px;">還有其他問題嗎？</h2>
             <p class="lead" style="margin-bottom: 30px;">隨時透過 Line 或 Instagram 聯絡我們，我們會盡快回應您的問題。</p>
             <div class="faq-cta-buttons">
-                <a href="https://lin.ee/Umt7lpD" target="_blank" class="btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px; min-width: 220px; text-align: center;">透過 Line 聯絡</a>
-                <a href="https://www.instagram.com/givespower.health" target="_blank" class="btn btn-default btn-lg" style="padding: 15px 40px; font-size: 18px; min-width: 220px; text-align: center;">追蹤 Instagram</a>
+                <a href="{{ brand.social.line.url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px; min-width: 220px; text-align: center;">透過 Line 聯絡</a>
+                <a href="{{ brand.social.instagram.url }}" target="_blank" class="btn btn-default btn-lg" style="padding: 15px 40px; font-size: 18px; min-width: 220px; text-align: center;">追蹤 Instagram</a>
             </div>
         </div>
     </section>

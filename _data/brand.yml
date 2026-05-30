@@ -1,0 +1,35 @@
+name: DUO FITNESS
+nav_name: DUO FITNESS
+tagline: 專業個人訓練服務，幫助您達成健康與健身目標
+description: DUO FITNESS 專注於提供專業的個人訓練服務，幫助您達成健康與健身目標。我們的專業教練團隊擁有豐富的經驗，為您量身打造最適合的訓練計劃。
+copyright_year: 2026
+
+logo:
+  nav: /img/logo/duo-logo-yellow.jpg
+  header: /img/logo/duo-logo-white.jpg
+  yellow: /img/logo/duo-logo-yellow.jpg
+  white: /img/logo/duo-logo-white.jpg
+
+social:
+  line:
+    label: "@575hgjnv"
+    id: "@575hgjnv"
+    url: https://line.me/R/ti/p/%40575hgjnv
+    qr_url: https://qr-official.line.me/gs/M_575hgjnv_GW.png?oat_content=qr
+  instagram:
+    label: "@duofitness.health"
+    url: https://www.instagram.com/duofitness.health?igsh=dWwzemIxcTM1NXc0
+  email:
+    label: givespower.health@gmail.com
+    address: givespower.health@gmail.com
+  address:
+    url: https://maps.app.goo.gl/V34db2nEdmVg2K6t7
+
+cta:
+  booking_label: 立即預約體驗
+  booking_url: https://line.me/R/ti/p/%40575hgjnv
+
+content_editor:
+  url: /content-editor.html
+  google_client_id_env: GOOGLE_CLIENT_ID
+  allowed_emails_env: EDITOR_ALLOWED_EMAILS

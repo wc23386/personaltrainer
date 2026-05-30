@@ -1,5 +1,5 @@
 # Site settings
-title: 包給力 Givespower.health
+title: DUO FITNESS
 email: givespower.health@gmail.com
 
 # Development Settings
@@ -7,12 +7,11 @@ baseurl: "/"
 url: "http://localhost:4000"
 
 include: ["_pages"]
-logo: 'img/logo/logo.png'
+logo: 'img/logo/duo-logo-yellow.jpg'
 
 line_url: https://lin.ee/Umt7lpD
-instagram_url: https://www.instagram.com/givespower.health
+instagram_url: https://www.instagram.com/duofitness.health?igsh=dWwzemIxcTM1NXc0
 address_url: https://maps.app.goo.gl/V34db2nEdmVg2K6t7
 
 # Developer settings
 developer_name: Crystal Chang
-

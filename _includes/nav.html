@@ -1,8 +1,9 @@
 <nav class="navbar navbar-expand-lg navbar-light fixed-top">
     <div class="container">
+        {% assign brand = site.data.brand %}
         <a class="navbar-brand" href="{{ '/' | relative_url }}">
-            <img src="{{ '/img/logo/logo.png' | relative_url }}" alt="包給力 Givespower.health" style="max-height: 40px; margin-right: 10px;">
-            <!-- 包給力 Givespower.health -->
+            <img src="{{ brand.logo.nav | relative_url }}" alt="{{ brand.name }}" style="max-height: 40px; margin-right: 10px;">
+            <span class="navbar-brand-name">{{ brand.nav_name }}</span>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -17,7 +18,7 @@
                     {% assign is_active = true %}
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link {% if item.button %}btn btn-primary {% endif %}{% if is_active %}active{% endif %}" href="{{ item.url | relative_url }}">{{ item.name }}</a>
+                    <a class="nav-link {% if item.button %}btn btn-primary {% endif %}{% if is_active %}active{% endif %}" href="{% if item.url contains '://' %}{{ item.url }}{% else %}{{ item.url | relative_url }}{% endif %}"{% if item.url contains '://' %} target="_blank" rel="noopener noreferrer"{% endif %}>{{ item.name }}</a>
                 </li>
                 {% endfor %}
             </ul>

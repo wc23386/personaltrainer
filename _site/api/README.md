@@ -13,6 +13,8 @@
 | `GITHUB_TOKEN` | GitHub Personal Access Token，需勾選 `repo` 權限 |
 | `GITHUB_REPO` | 倉庫名稱，格式：`owner/repo`（例如 `myuser/personaltrainer`） |
 | `GITHUB_BRANCH` | 選填，預設為 `main` |
+| `GOOGLE_CLIENT_ID` | Google OAuth Web Client ID，用於內容管理登入 |
+| `EDITOR_ALLOWED_EMAILS` | 允許儲存內容的 Google email 清單，以逗號分隔 |
 
 ### 行為
 
@@ -45,3 +47,50 @@
 - 讀取現有 `_data/testimonials.yml`，於檔尾追加一筆 YAML
 - 若有上傳圖片：寫入 `img/testimonials/<名稱衍生>.jpg`（或對應副檔名）
 - 儲存後執行 `git pull` 或等正式站重建，即可在「成功案例」頁面看到
+
+---
+
+## content（統一內容管理 API）
+
+用於 `/content-editor.html`，統一儲存部落格文章與成功案例。
+
+### 認證
+
+- 前端透過 Google Identity Services 取得 ID token。
+- API 會用 `GOOGLE_CLIENT_ID` 驗證 token 的 audience。
+- Google email 必須是 verified。
+- Email 必須列在 `EDITOR_ALLOWED_EMAILS`。
+
+### Request
+
+`POST /api/content`
+
+```json
+{
+  "type": "post",
+  "data": {
+    "title": "文章標題",
+    "date": "2026-05-30",
+    "slug": "article-slug",
+    "excerpt": "摘要",
+    "content": "Markdown 內容"
+  }
+}
+```
+
+或：
+
+```json
+{
+  "type": "testimonial",
+  "data": {
+    "name": "客戶名稱",
+    "category": "減重成功",
+    "content": "見證內容"
+  }
+}
+```
+
+### auth-config
+
+`GET /api/auth-config` 會回傳前端登入需要的 `GOOGLE_CLIENT_ID`。

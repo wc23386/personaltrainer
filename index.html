@@ -1,6 +1,6 @@
 ---
 layout: default
-title: 包給力 Givespower.health - 專業個人訓練服務
+title: DUO FITNESS - 專業個人訓練服務
 ---
 <!DOCTYPE html>
 <html lang="zh-TW">
@@ -13,18 +13,19 @@ title: 包給力 Givespower.health - 專業個人訓練服務
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
 </head>
 <body>
+    {% assign brand = site.data.brand %}
     {% include nav.html %}
 
     <!-- Hero Section: light tangerine bg, black text, dark topaz button -->
     <header class="hero-home">
         <div class="container text-center">
-            <img src="{{ '/img/logo/logo.png' | relative_url }}" alt="包給力 Givespower.health" class="logo" style="max-width: 200px; margin-bottom: 30px;">
-            <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">包給力 Givespower.health</h1>
+            <img src="{{ brand.logo.header | relative_url }}" alt="{{ brand.name }}" class="logo" style="max-width: 200px; margin-bottom: 30px;">
+            <h1 style="font-size: 48px; font-weight: bold; margin-bottom: 20px;">{{ brand.name }}</h1>
             <h3 class="lead" style="font-size: 24px; margin-bottom: 30px;">專業個人訓練服務，<br class="d-md-none">幫助您達成健康與健身目標</h3>
             <p style="font-size: 18px; margin-bottom: 40px; max-width: 800px; margin-left: auto; margin-right: auto;">
                 我們的專業教練團隊擁有豐富的經驗，為您量身打造最適合的訓練計劃。無論您是想減肥、增肌、改善體態，還是提升整體健康，我們都能幫助您達成目標。
             </p>
-            <a href="{{ '/booking.html' | relative_url }}" class="btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">立即預約體驗</a>
+            <a href="{{ brand.cta.booking_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">{{ brand.cta.booking_label }}</a>
         </div>
     </header>
 
@@ -40,7 +41,7 @@ title: 包給力 Givespower.health - 專業個人訓練服務
             </div>
 
             <div class="row">
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card text-center">
                         <div class="card-body">
                             <img src="{{ '/img/icons/exercise-routine.gif' | relative_url }}" alt="一對一私人訓練" style="width: 80px; height: 80px; margin-bottom: 20px;">
@@ -50,7 +51,7 @@ title: 包給力 Givespower.health - 專業個人訓練服務
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <div class="card text-center">
                         <div class="card-body">
                             <img src="{{ '/img/icons/muscle.gif' | relative_url }}" alt="企業團班" style="width: 80px; height: 80px; margin-bottom: 20px;">
@@ -60,7 +61,9 @@ title: 包給力 Givespower.health - 專業個人訓練服務
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                {% comment %}
+                Online course is temporarily hidden. Restore this card when the service is ready to sell again.
+                <div class="col-md-4">
                     <div class="card text-center">
                         <div class="card-body">
                             <img src="{{ '/img/icons/treadmill.gif' | relative_url }}" alt="線上教練課程" style="width: 80px; height: 80px; margin-bottom: 20px;">
@@ -70,7 +73,8 @@ title: 包給力 Givespower.health - 專業個人訓練服務
                         </div>
                     </div>
                 </div>
-                <div class="col-md-3">
+                {% endcomment %}
+                <div class="col-md-4">
                     <div class="card text-center">
                         <div class="card-body">
                             <img src="{{ '/img/icons/balance.gif' | relative_url }}" alt="體態評估" style="width: 80px; height: 80px; margin-bottom: 20px;">
@@ -194,7 +198,7 @@ title: 包給力 Givespower.health - 專業個人訓練服務
         <div class="container text-center">
             <h2 style="font-size: 36px; font-weight: bold; margin-bottom: 24px;">準備好開始您的健身之旅了嗎？</h2>
             <p class="lead" style="margin-bottom: 30px;">立即預約免費體驗，讓我們一起達成您的目標！</p>
-            <a href="{{ '/booking.html' | relative_url }}" class="btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">立即預約體驗</a>
+            <a href="{{ brand.cta.booking_url }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-lg" style="padding: 15px 40px; font-size: 18px;">{{ brand.cta.booking_label }}</a>
         </div>
     </section>
 

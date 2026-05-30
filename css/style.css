@@ -74,11 +74,29 @@ a:hover {
 .navbar-brand {
     font-weight: bold;
     font-size: 24px;
-    color: var(--black) !important;
+    color: var(--dmc-742-light-tangerine) !important;
+    display: inline-flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.navbar-brand-name {
+    font-family: 'Segoe UI Black', 'Arial Black', 'Impact', 'Segoe UI', sans-serif;
+    font-size: 22px;
+    font-weight: 900;
+    letter-spacing: 0;
+    color: var(--dmc-742-light-tangerine);
+    text-transform: uppercase;
+    white-space: nowrap;
+    line-height: 1;
 }
 
 .navbar-brand:hover {
-    color: var(--dmc-782-dark-topaz) !important;
+    color: var(--dmc-742-light-tangerine) !important;
+}
+
+.navbar-brand:hover .navbar-brand-name {
+    color: var(--dmc-782-dark-topaz);
 }
 
 .navbar-nav .nav-link {
@@ -620,7 +638,7 @@ footer .social-links a {
         white-space: normal; /* Allow wrapping */
     }
     
-    /* Break long compound words like "Givespower.health" on mobile */
+    /* Break long brand names on mobile */
     @media (max-width: 480px) {
         .hero-home h1,
         .page-header h1 {
