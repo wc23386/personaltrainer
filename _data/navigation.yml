@@ -11,8 +11,6 @@
   url: /blog.html
 - name: 常見問題
   url: /faq.html
-- name: 內容管理
-  url: /content-editor.html
 - name: 預約體驗
   url: https://line.me/R/ti/p/%40575hgjnv
   button: true
